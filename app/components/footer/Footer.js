@@ -1,15 +1,13 @@
 // components/Footer.js
 import React from 'react';
 import Image from 'next/image';
-import styles from './footer.module.css';+
+import styles from './footer.module.css';
 
 import frame from '../../../public/Frame 4.png';
 import facebookLogo from '../../../public/facebooklogo.png';
 import instagramLogo from '../../../public/facebooklogo.png';
 import twitterLogo from '../../../public/twitterlogo.ong.png';
 import tiktokLogo from '../../../public/tik-tok.png';
-
-import styles from './Footer.module.css';
 
 export default function Footer () {
   return (
