@@ -92,7 +92,7 @@ export default function HomeAuth () {
       setUserPerfilURL(data?.[0]?.fotoPerfilURL);
       userPerfilURLTest = data?.[0]?.fotoPerfilURL;
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao buscar usuário:', error.message);
     }
   };
