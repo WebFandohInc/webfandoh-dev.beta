@@ -1,95 +1,111 @@
+'use client'
+
 import Image from 'next/image'
 import styles from './page.module.css'
+import { Container, Nav, Navbar } from "react-bootstrap";
+import CardIntro from './components/card/CardIntro';
+import { useEffect, useState } from 'react';
+import useSWR from 'swr';
+
+
+import yourFeed from '../public/feedpng.png';
+import logoImage from '../public/logobranca.png';
+
+import LoginModal from './components/login-modal/LoginModal';
+
+// Supabase
+import supabase from './service/supabase';
 
 export default function Home() {
+  
+  const { data: dados, error } = useSWR('posts', async () => {
+    const { data, error } = await supabase.from('posts').select('*');
+    if (error) {
+      console.error(error);
+      throw new Error('Failed to fetch data');
+    }
+    return data;
+  });
+
+  const loading = !dados;
+
+  const [inicioClicado, setInicioClicado] = useState(true);
+  const [fazerLoginClicado, setFazerLoginClicado] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+
+  const handleToggle = () => {
+    setExpanded(!expanded);
+  };
+
+  const handleClickMenu = () => {
+    setInicioClicado(false);
+    setFazerLoginClicado(true);
+  };
+
+  const handleLoginClick = () => {
+    setModalShow(true);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <Container fluid style={{ margin: 0, padding: 0, backgroundColor: 'white', overflow: 'hidden'}}>
+          <Navbar bg="primary" variant="dark" expand="lg">
+          <Container>
+            <Navbar.Brand>
+              <Image
+              
+                src={logoImage.src} 
+                alt="Logo" 
+                // fluid 
+                width={200}
+                height={35}
+
+              />
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="navbar-nav" />
+            <Navbar.Collapse id="navbar-nav" >
+              <Nav className="ms-auto">
+                <Nav.Link className={`me-2 ${inicioClicado ? "active" : ""}`} onClick={() => setInicioClicado(true)}>
+                  Início
+                </Nav.Link>
+                <Nav.Link 
+                onClick={
+                  () => handleLoginClick()
+                }>
+                  Fazer login
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+
+        <div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: 'white', marginTop: '70px'}}>
+          <Image src={yourFeed.src} alt="Imagem Centralizada" width={300} height={120}/>
         </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        {loading ? (
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+          // Renderize o indicador de carregamento aqui
+          <div className="d-flex justify-content-center align-items-center" style={{ height: '50vh' }}>
+            <p>Carregando...</p>
+          </div>
+        ) : (
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
+          // Renderize os posts aqui
+          inicioClicado && dados.map((post) => (
+            <CardIntro
+              key={post.id}
+              imgSrc={post.foto_capa_url}
+              title={post.titulo_lista}
+              userImgSrc={post.foto_usuario_url}
+              userName={post.nome_usuario}
+              post={post}
+            />
+          ))
+        )}
+      <LoginModal show={modalShow} onHide={() => setModalShow(false)} />
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+      
+    </Container>
+  );
 }

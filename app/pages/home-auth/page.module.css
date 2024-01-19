@@ -1,0 +1,45 @@
+.textLeft {
+    color: rgba(45, 45, 45, 0.963);
+    font-weight: 700;
+}
+
+.uploadContainer {
+    text-align: center;
+    margin-top: -13px;
+}
+
+.uploadLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    background-color: #ffffff;
+    color: #0084ff;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.imageUpload {
+    display: none;
+}
+
+.imagePreview {
+    margin-top: 10px;
+    border: 1.6px solid #0084ff;
+    padding: 0; /* Remova o valor fixo do padding */
+    height: 400px; /* Ajuste a altura conforme necessário */
+    width: 700px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Certifique-se de que o conteúdo extra seja cortado */
+}
+
+.imagePreview Image {
+    width: 100%; /* Garante que a imagem preencha toda a largura */
+    height: 100%; /* Garante que a imagem preencha toda a altura */
+    border-radius: 15px;
+}

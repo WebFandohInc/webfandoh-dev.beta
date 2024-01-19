@@ -1,0 +1,480 @@
+/* eslint-disable react/jsx-no-undef */
+'use client'
+
+import { Button, Col, Container, Nav, Navbar, Row, Form, Toast } from "react-bootstrap";
+
+import styles from './page.module.css';
+import CardIntro from "@/app/components/card/CardIntro";
+import { useCallback, useEffect, useState } from "react";
+import { FaPencilAlt, FaSignOutAlt } from 'react-icons/fa';
+import { BsImage, BsPlus, BsShare, BsTrash } from 'react-icons/bs';
+
+// import { Footer } from '../../components/footer/Footer';
+
+import Image from "next/image";
+import { useRouter } from 'next/router'
+
+import supabase from "@/app/service/supabase";
+
+import yourFeed from '../../../public/feedpng.png';
+import logoImage from '../../../public/logobranca.png';
+import criarListaImage from '../../../public/listapepople.png';
+import useSWR from "swr";
+
+export default function HomeAuth () {
+
+  // const [dados, setDados] = useState([]);
+  const [userDados, setuserDados] = useState([]);
+  const [inicioClicado, setInicioClicado] = useState(true);
+  const [escreverClicado, setEscreverClicado] = useState(false);
+  const [perfilClicado, setPerfilClicado] = useState(false);
+  const [sairClicao, setSairClicado] = useState(false);
+  const toggleCadastroRealizado = () => setCadastroRealizado(true);
+
+
+  const [expanded, setExpanded] = useState(false);
+
+  const [imagemSelecionada, setImagemSelecionada] = useState(null);
+
+  const [session, setSession] = useState();
+  const [user, setUser] = useState();
+
+  const [userEmail, setUserEmail] = useState();
+  const [userPerfilURL, setUserPerfilURL] = useState();
+  const [userName, setUserName] = useState();
+
+  var userNameTest;
+  var userPerfilURLTest;
+
+  const { data: dados, error } = useSWR('posts', async () => {
+    const { data, error } = await supabase.from('posts').select('*');
+    if (error) {
+      console.error(error);
+      throw new Error('Failed to fetch data');
+    }
+    return data;
+    
+  });
+
+  const loading = !dados;
+
+  // const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const verifyAuth = async () => {
+      const sessionData = await supabase.auth.getSession();
+
+      if(!sessionData.data.session) {
+        window.location.href = '/';
+      }
+    };
+
+    verifyAuth();
+  }, []);
+
+  const fetchUsuario = async (email: string) => {
+    try {
+      
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      const { data, error } = await supabase
+        .from('usuarios')
+        .select('*')
+        .eq('user_email', email);
+
+      if (error) {
+        throw error;
+      }
+      
+      setUserName(data?.[0]?.nome);
+      userNameTest = data?.[0]?.nome;
+
+      setUserPerfilURL(data?.[0]?.fotoPerfilURL);
+      userPerfilURLTest = data?.[0]?.fotoPerfilURL;
+
+    } catch (error) {
+      console.error('Erro ao buscar usuário:', error.message);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const sessionData = await supabase.auth.getSession();
+  
+      const userData = await supabase.auth.getUser();
+  
+      const userEmailValue = userData?.data?.user?.email;
+  
+      if (userEmailValue) {
+
+        setUserEmail(userEmailValue);
+        setSession(sessionData);
+        setUser(userData);
+
+        fetchUsuario(userEmailValue);
+      } else {
+        // Lidar com o caso em que userEmail não está definido
+        console.error('userEmail não está definido no userData:', userData);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+
+  
+
+  const handleToggle = () => {
+    setExpanded(!expanded);
+  };
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    window.location.href = '/';
+  }
+
+  const handleClickMenu = (menu : any) => {
+    setInicioClicado(menu === 'inicio');
+    setEscreverClicado(menu === 'escrever');
+    setPerfilClicado(menu === 'perfil');
+    setSairClicado(menu === 'sair');
+
+    if(menu === 'sair') {
+        handleLogout();
+    }
+  };  
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setImagemSelecionada(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const [tags, setTags] = useState([]);
+  const [tagInput, setTagInput] = useState('');
+
+  const handleTagInput = (e) => {
+    setTagInput(e.target.value);
+  };
+
+  const handleAddTag = (e) => {
+    e.preventDefault();
+
+    if (tagInput.trim() !== '') {
+      setTags([...tags, tagInput.trim()]);
+      setTagInput('');
+    }
+  };
+
+  const handleRemoveTag = (index : any) => {
+    const updatedTags = [...tags];
+    updatedTags.splice(index, 1);
+    setTags(updatedTags);
+  };
+
+  const [itens, setItens] = useState([
+    { id: Date.now(), titulo: '', imagemUrl: '', conteudo: '' },
+  ]);
+  
+  const handleAdicionarItem = () => {
+    setItens([...itens, { id: Date.now(), titulo: '', imagemUrl: '', conteudo: '' }]);
+  };
+
+  const handleRemoverItem = (id) => {
+    setItens(itens.filter((item) => item.id !== id));
+  };
+
+  const handleAlterarImagemItem = (id, imagem) => {
+    const imagemUrl = URL.createObjectURL(imagem);
+  
+    setItens((prevItens) => {
+      return prevItens.map((item) => (item.id === id ? { ...item, imagemUrl } : item));
+    });
+  };
+  
+  const handleCampoItemChange = useCallback((id, campo, valor) => {
+    setItens((prevItens) =>
+      prevItens.map((item) =>
+        item.id === id ? { ...item, [campo]: valor } : item
+      )
+    );
+  }, [setItens]);
+
+  const [tituloLista, setTituloLista] = useState('');
+  const [descricao, setDescricao] = useState('');
+
+  const [cadastroRealizado, setCadastroRealizado] = useState(false);
+
+  const handlePublicarLista = async () => {
+    try {
+      // Função para converter imagem para base64
+      const convertImageToBase64 = async (imageUrl : any) => {
+        try {
+          const response = await fetch(imageUrl);
+          const blob = await response.blob();
+      
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+        } catch (error) {
+          console.error('Erro ao converter imagem para base64:', error);
+          throw error;
+        }
+      };
+
+      const fotoUsuarioBase64 = await convertImageToBase64(userPerfilURL);
+
+      const itensBase64 = await Promise.all(
+        itens.map(async (item) => {
+          const imagemItemBase64 = await convertImageToBase64(item.imagemUrl);
+          return {
+            titulo: item.titulo,
+            imagemURL: imagemItemBase64,
+            conteudo: item.conteudo,
+          };
+        })
+      );
+  
+      const postData = {
+        user_email: userEmail,
+        nome_usuario: userName,
+        foto_usuario_url: fotoUsuarioBase64,
+        foto_capa_url: imagemSelecionada,
+        titulo_lista: tituloLista,
+        descricao: descricao,
+        tags: tags,
+        itens: itensBase64,
+      };
+  
+      if (fotoUsuarioBase64) {
+        // Enviar dados para o Supabase
+        const { data, error } = await supabase.from('posts').upsert(postData);
+  
+        if (error) {
+          throw error;
+        }
+  
+        setCadastroRealizado(true);
+  
+        setTimeout(() => {
+          setCadastroRealizado(false);
+          window.location.reload();
+        }, 3500);
+  
+        console.log('Lista publicada com sucesso:', data);
+      } else {
+        console.error('Erro ao publicar lista: A imagem do usuário não pôde ser convertida para base64.');
+      }
+    } catch (error) {
+      console.error('Erro ao publicar lista:', error.message);
+    }
+  };
+  
+  
+  
+  return (
+
+      <Container fluid style={{ margin: 0, padding: 0, backgroundColor: 'white', overflow: 'hidden'}}>
+        <Navbar bg="primary" variant="dark" expand="lg">
+          <Container>
+            <Navbar.Brand>
+              <Image 
+                src={logoImage.src} 
+                alt="Logo" 
+                // fluid="true"
+                width={200}
+                height={35}
+              />
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="navbar-nav" />
+            <Navbar.Collapse id="navbar-nav">
+                <Nav className="ms-auto">
+                <Nav.Link className={`me-2 ${inicioClicado ? "active" : ""}`} onClick={() => handleClickMenu('inicio')}>
+                    Início
+                </Nav.Link>
+
+                <Nav.Link className={`me-2 ${escreverClicado ? "active" : ""}`} onClick={() => handleClickMenu('escrever')}>
+                <FaPencilAlt className="me-1" /> Escrever
+                </Nav.Link>
+
+                <Nav.Link className={`me-2 ${sairClicao ? "active" : ""}`} onClick={() => handleClickMenu('sair')}>
+                    <FaSignOutAlt className="me-1"/> Sair
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+      </Navbar>
+
+     {inicioClicado && (
+        <div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: 'white', marginTop: '70px'}}>
+            <Image src={yourFeed.src} alt="Imagem Centralizada" width={300} height={120}/>
+        </div>
+     )}
+
+    {loading ? (
+      // Renderize o indicador de carregamento aqui
+      <div className="d-flex justify-content-center align-items-center" style={{ height: '50vh' }}>
+        <p>Carregando...</p>
+      </div>
+    ) : (
+      // Renderize os posts aqui
+      inicioClicado && dados.map((post) => (
+        <CardIntro
+          key={post.id}
+          imgSrc={post.foto_capa_url}
+          title={post.titulo_lista}
+          userImgSrc={post.foto_usuario_url}
+          userName={post.nome_usuario}
+          post={post}
+        />
+      ))
+    )}
+
+    {escreverClicado && (
+        <div className="d-flex flex-column align-items-center" style={{ backgroundColor: 'white', marginTop: '10px'}}>
+        <Image src={criarListaImage.src} alt="Imagem Centralizada" width={780} height={250}/>
+        <h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '530px', fontWeight: 'bold' }}>Capa</h1>
+        <p className={styles.textLeft} style={{ marginRight: '35px' }}>
+            ⚠️ A função de rascunho não está ativa no momento. <br />
+            ⚠️ Poste seu conteúdo imediatamente assim que terminar para evitar perdas.
+        </p>        
+        <Form.Group controlId="formFileLg" className="mb-3">
+        <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
+        <Form.Control type="file" size="lg" onChange={handleFileChange} />
+        </Form.Group>
+
+        {imagemSelecionada && (
+            <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '55vh', width: '80%', marginTop: '20px' }}>
+                <div style={{ position: 'relative', width: '60%', height: '120%', border: '3px solid #2E8CE2', borderRadius: '25px', overflow: 'hidden',}}>
+                <Image
+                    src={imagemSelecionada}
+                    alt="Imagem Selecionada"
+                    layout="fill"
+                    objectFit="cover"
+                    style={{padding: "0px"}}
+                />
+                </div>
+            </div>
+        )}
+
+        <h3 className="cover-title" style={{ color: '#373737', marginTop: '20px', marginRight: '530px', fontWeight: 'bolder' }} >Título</h3>
+
+        <Form.Control 
+          style={{width: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder'}}
+          type="text" 
+          placeholder="Crie um título atraente e chamativo para o seu conteúdo." 
+          className="mb-3"
+          onChange={(e) => setTituloLista(e.target.value)}
+        />
+
+        <h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',marginRight: '460px', fontWeight: 'bold'}}
+        >Descrição</h3>
+        <Form.Control  
+          style={{width: "600px", height: "100px", fontSize: "15px", borderRadius: "12px",}} 
+          as="textarea" 
+          rows={3} 
+          placeholder="Escrever descrição sobre o seu conteúdo...." 
+          className="mb-3"
+          onChange={(e) => setDescricao(e.target.value)}
+        />
+
+        <h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder', marginRight: '530px'}}>Tags</h3>
+        <div className="d-flex flex-wrap mb-3">
+        {tags.map((tag, index) => (
+          <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
+            <span className="mr-2" style={{marginRight: '10px'}}>{tag}</span>
+            <Button variant="outline-light" size="sm" onClick={() => handleRemoveTag(index)}>X</Button>
+          </div>
+        ))}
+      </div>
+
+      
+      <Form.Control
+        style={{ width: "580px", height: "40px", fontSize: "15px" }}
+        type="text"
+        placeholder="Inclua tags relevantes, como filmes, aventura, cultura, história..."
+        value={tagInput}
+        onChange={handleTagInput}
+        onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
+      />
+
+        {itens.map((item) => (
+        <div key={item.id} className="adicionar-item-container mt-3 p-3" style={{ width: '610px', border: '0px solid #ccc', borderRadius: '10px', marginBottom: '2rem'}}>
+          <div className="d-flex justify-content-between">
+            <div>
+              <Button variant="danger" size="sm" style={{fontWeight: 'bolder'}} onClick={() => handleRemoverItem(item.id)}>
+                <BsTrash className="mr-2" /> Remover Item
+              </Button>
+            </div>
+            <Form.Control style={{ width: '400px', fontSize: '18px',borderRadius: "8px", fontWeight: 'bolder'}} type="text" placeholder="Título" 
+            onChange={(e) => handleCampoItemChange(item.id, 'titulo', e.target.value)}
+            />
+          </div>
+
+          <Form.Group controlId={`formFileLg-${item.id}`} className="mt-3">
+            <Form.Label>Selecione uma imagem</Form.Label>
+            <Form.Control 
+            type="file" 
+            size="md"
+
+            onChange={(e) => handleAlterarImagemItem(item.id, e.target.files[0])}
+            />
+          </Form.Group>
+
+          {item.imagemUrl && (
+          <div className="d-flex flex-column align-items-center">
+          <div style={{ borderRadius: '12%', overflow: 'hidden' }}>
+            <Image
+              src={item.imagemUrl}
+              alt={`Imagem do Item ${item.id}`}
+              width={440}
+              height={260}
+              className="mb-2"
+              style={{ marginTop: '20px' }}
+            />
+          </div>
+        </div>
+          )}
+
+          <Form.Control
+            style={{ width: '100%', height: '180px', fontSize: '15px', marginTop: '10px', borderRadius: '12px'}}
+            as="textarea"
+            rows={3}
+            placeholder="Escreva o conteúdo do item..."
+            onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
+          />
+        </div>
+      ))}
+
+      <div className="d-flex justify-content" style={{ width: '570px', marginTop: '20px' }}>
+                <Button variant="primary" size="lg" style={{marginRight: '10px', fontWeight: 'bolder'}} onClick={handleAdicionarItem}>
+                  <BsPlus className="mr-2"/> Adicionar Item
+                </Button>
+                <Button variant="success" size="lg" style= {{ marginRight: '10px', fontWeight: 'bolder'}}   onClick={handlePublicarLista}>
+                  <BsShare className="mr-2" /> Publicar Lista
+                </Button>
+          </div>
+          <Toast show={cadastroRealizado} onClose={toggleCadastroRealizado} style={{backgroundColor: 'green', color: 'white'}} delay={200}>
+                <Toast.Body>Lista publicada com sucesso!</Toast.Body>
+          </Toast>
+
+      </div>
+
+    )}
+
+    </Container>
+    
+  );
+}

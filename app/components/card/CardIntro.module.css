@@ -1,0 +1,103 @@
+
+.listaCard {
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    width: 600px;
+    height: 355px;
+    margin: 20px auto;
+    box-shadow: 0 5px 1px rgba(22, 22, 22, 0.1);
+}
+
+@media screen and (max-width: 767px) {
+    .listaCard {
+        width: 93%; 
+        height: 380px;
+    }
+}
+
+.cardTag {
+    width: 150px;
+    padding: 0.2rem 0.5rem;
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    background: #1460a2;
+    margin-left: 10px;
+    color: #fff;
+}
+
+.capaLista img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+
+.infoLista {
+    padding: 10px;
+}
+
+.infoLista h3 {
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
+    color: #171717;
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+}
+
+.usuario Image {
+    width: 45px;
+    height: 40px;
+    margin-top: -15px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 767px) {
+    .usuario Image {
+        margin-top: -12px;
+    }
+}
+
+.usuario span {
+    font-weight: bold;
+    font-size: 16px;
+    color: #2a2a2a;
+}
+
+.lerMais {
+    display: block;
+    margin: 10px auto;
+    margin-top: -40px;
+    align-items: center;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 5px 1px rgba(68, 68, 68, 0.1);
+}
+
+.lerMais:hover {
+    background-color: #0056b3;
+}
+
+
+.modalHeader  {
+    color: white; /* ou qualquer outra cor desejada */
+    background-color: rgb(18, 113, 255);
+}
+  
