@@ -56,28 +56,61 @@ export default function CardIntro ({imgSrc, title, userImgSrc, userName, post}) 
             </a>
 
         </Modal.Header>
-        <Modal.Body className="text-center">
-            
-            <Modal.Title style={{color: "black", marginBottom: '20px', maxWidth: '1000px'}}>{title}</Modal.Title>
-            <Image src={imgSrc} alt="Capa do Post" fluid width={500} height={300} style={{borderRadius: '10px', border: '5px solid rgb(18, 113, 255)', marginBottom: '20px'}}/>
+     
+        <Modal.Body className="text-center">         
+            <Image src={imgSrc} alt="Capa do Post" fluid width={600} height={300} style={{borderRadius: '20px', marginBottom: '10px', marginTop:'15px'}}/>
+            <Modal.Title style={{color: "black",marginBottom: '10px', maxWidth: '1000px', fontFamily: 'Raleway' }}>{title}</Modal.Title>
             <br/>
-            <p style={{color: 'black'}}>{post?.descricao}</p>
+            <p style={{color: 'black', marginTop: '-10px', marginBottom: '30px', whiteSpace: 'pre-line'}}>{post?.descricao}</p>
             <div>
             <ul className="list-unstyled">
                 {post?.itens.map((item, index) => (
                 <li key={index} className="text-left">
-                    <h4><strong style={{color: 'black'}}>{index + 1}. {item.titulo}</strong></h4>
-                    <Image src={item.imagemURL} alt={item.title} width={50} height={50} style={{marginBottom: '20px'}}/>
-                    <p style={{color: 'black'}}>{item.conteudo}</p>
+<div style={{ display: 'flex', alignItems: 'center' }}>
+  <h4>
+    <strong style={{ color: 'black',marginRight: '10px',  whiteSpace: 'pre-line', fontFamily: 'Raleway' }}>{index + 1}.</strong>
+  </h4>
+  <h4>
+    <strong style={{ color: 'black', fontFamily: 'Raleway'}}>{item.titulo}</strong>
+  </h4>
+</div>
+<Image
+  src={item.imagemURL}
+  alt={item.title}
+  width={500}
+  height={300}
+  className="img-fluid" // Essa classe bootstrap garante que a imagem do item fique responsiva
+  style={{
+    marginBottom: '10px',
+    marginTop: '15px',
+    borderRadius: '25px',
+    maxWidth: '100%', // Garante que a imagem não ultrapasse a largura do contêiner pai
+    height: 'auto', // Mantém a proporção da imagem de forma harmônica
+  }}
+/> 
+<p style={{color: 'black'}}>{item.conteudo}</p>
                 </li>
                 ))}
             </ul>
             </div>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseModal}>
-            Fechar
-            </Button>
+        <Button
+  variant="secondary"
+  onClick={handleCloseModal}
+  style={{
+    backgroundColor: '#FFFFFF',
+    color: '#1264A2',
+    fontFamily: 'raleway',
+    border: '3px solid #1264A2',
+    borderRadius: '18px',
+    padding: '8px 16px',
+    cursor: 'pointer',
+  }}
+>
+  Fechar
+</Button>
+
         </Modal.Footer>
         </Modal>
         </div>
