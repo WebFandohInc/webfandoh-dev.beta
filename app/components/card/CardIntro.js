@@ -88,7 +88,7 @@ export default function CardIntro ({imgSrc, title, userImgSrc, userName, post}) 
     height: 'auto', // Mantém a proporção da imagem de forma harmônica
   }}
 /> 
-<p style={{color: 'black'}}>{item.conteudo}</p>
+<p style={{color: 'black', whiteSpace: 'pre-line'}}>{item.conteudo}</p>
                 </li>
                 ))}
             </ul>
