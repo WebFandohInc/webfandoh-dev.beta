@@ -1,19 +1,28 @@
 
+
+
+
+
+
+
+
 .listaCard {
     border: 1px solid #ffffff;
     border-radius: 20px;
-    width: 600px;
-    height: 355px;
+    max-width: 500px;
+    height: auto; 
+    border: 1px solid #bcbcbc;
     margin: 20px auto;
-    box-shadow: 0 5px 1px rgba(22, 22, 22, 0.1);
+    box-shadow: 0 4px 0px #c2c2c2;
 }
 
-@media screen and (max-width: 767px) {
+@media (max-width: 768px) {
     .listaCard {
-        width: 93%; 
-        height: 380px;
+      max-width: 100%; /* Ocupa toda a largura em telas menores */
+      margin: 10px; /* Margem menor nas laterais */
+      margin-top: 30px;
     }
-}
+  }
 
 .cardTag {
     width: 150px;
@@ -23,18 +32,25 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     border-radius: 8px;
-    background: #1460a2;
-    margin-left: 10px;
+    background: #0983ee;
+    margin-left: 100px;
     color: #fff;
 }
 
 .capaLista img {
-    width: 100%;
-    height: 250px;
+    width: 100%; /* Ocupa toda a largura do contêiner pai */
+    height: auto; /* Altura automática para manter a proporção da imagem */
+    margin-left: 0; /* Removendo margem à esquerda em telas menores */
+    margin-top: -0px;
     object-fit: cover;
-    border-radius: 15px;
-}
+    border-radius: 18px;
+  }
 
+@media (min-width: 768px) {
+    .capaLista img {
+      width: 540px; 
+    }
+  }
 
 .infoLista {
     padding: 10px;
@@ -45,7 +61,7 @@
     font-family: 'Raleway', sans-serif;
     color: #171717;
     font-weight: 600;
-    margin-top: -10px;
+    margin-block-end: 20px;
 }
 
 .usuario {
@@ -68,9 +84,9 @@
 }
 
 .usuario span {
-    font-weight: bold;
+    font-weight: light;
     font-size: 16px;
-    color: #2a2a2a;
+    color: #1a1a1a;
 }
 
 .lerMais {
@@ -97,7 +113,18 @@
 
 
 .modalHeader  {
-    color: white; /* ou qualquer outra cor desejada */
-    background-color: rgb(18, 113, 255);
+    color: rgb(16, 111, 226); /* ou qualquer outra cor desejada */
+    background-color: rgb(0, 102, 255);
 }
   
+
+.lerMais {
+    background-color: #fff;
+    color: #1577c3;
+    border: 2px solid #1264A2;
+    padding: 8px 16px;
+    box-shadow: 0 3px 1px #0d4168;
+    border-radius: 15px;
+  }
+  
+
