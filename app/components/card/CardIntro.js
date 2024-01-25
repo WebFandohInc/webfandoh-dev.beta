@@ -59,7 +59,7 @@ export default function CardIntro ({imgSrc, title, userImgSrc, userName, post}) 
      
         <Modal.Body className="text-center">         
             <Image src={imgSrc} alt="Capa do Post" fluid width={600} height={300} style={{borderRadius: '20px', marginBottom: '10px', marginTop:'15px'}}/>
-            <Modal.Title style={{color: "black",marginBottom: '10px', maxWidth: '1000px', fontFamily: 'Raleway' }}>{title}</Modal.Title>
+            <Modal.Title style={{color: "black",marginBottom: '10px', maxWidth: '1000px', fontWeight: 'bold', fontFamily: 'Raleway, arial' }}>{title}</Modal.Title>
             <br/>
             <p style={{color: 'black', marginTop: '-10px', marginBottom: '30px', whiteSpace: 'pre-line'}}>{post?.descricao}</p>
             <div>
@@ -68,10 +68,10 @@ export default function CardIntro ({imgSrc, title, userImgSrc, userName, post}) 
                 <li key={index} className="text-left">
 <div style={{ display: 'flex', alignItems: 'center' }}>
   <h4>
-    <strong style={{ color: 'black',marginRight: '10px',  whiteSpace: 'pre-line', fontFamily: 'Raleway' }}>{index + 1}.</strong>
+    <strong style={{ color: 'black',marginRight: '10px',  whiteSpace: 'pre-line', fontWeight: 'bold', fontFamily: 'Raleway, arial' }}>{index + 1}.</strong>
   </h4>
   <h4>
-    <strong style={{ color: 'black', fontFamily: 'Raleway'}}>{item.titulo}</strong>
+    <strong style={{ color: 'black', fontWeight: 'bold', fontFamily: 'Raleway, arial'}}>{item.titulo}</strong>
   </h4>
 </div>
 <Image
@@ -101,7 +101,8 @@ export default function CardIntro ({imgSrc, title, userImgSrc, userName, post}) 
   style={{
     backgroundColor: '#FFFFFF',
     color: '#1264A2',
-    fontFamily: 'raleway',
+    fontFamily: 'raleway, arial',
+    fontWeight: 'bold',
     border: '3px solid #1264A2',
     borderRadius: '18px',
     padding: '8px 16px',
