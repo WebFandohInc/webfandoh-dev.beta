@@ -61,7 +61,7 @@ export default function CardIntro ({imgSrc, title, userImgSrc, userName, post}) 
             <Image src={imgSrc} alt="Capa do Post" fluid width={600} height={300} style={{borderRadius: '20px', marginBottom: '10px', marginTop:'15px'}}/>
             <Modal.Title style={{color: "black",marginBottom: '10px', maxWidth: '1000px', fontWeight: 'bold', fontFamily: 'Raleway, arial' }}>{title}</Modal.Title>
             <br/>
-            <p style={{color: 'black', marginTop: '-10px', marginBottom: '30px', whiteSpace: 'pre-line'}}>{post?.descricao}</p>
+            <p style={{ color: 'black', marginTop: '-10px', marginBottom: '30px', whiteSpace: 'pre-line', textAlign: 'left' }}>{post?.descricao}</p>
             <div>
             <ul className="list-unstyled">
                 {post?.itens.map((item, index) => (
@@ -88,7 +88,7 @@ export default function CardIntro ({imgSrc, title, userImgSrc, userName, post}) 
     height: 'auto', // Mantém a proporção da imagem de forma harmônica
   }}
 /> 
-<p style={{color: 'black', whiteSpace: 'pre-line'}}>{item.conteudo}</p>
+<p style={{ color: 'black', whiteSpace: 'pre-line', textAlign: 'left' }}>{item.conteudo}</p>
                 </li>
                 ))}
             </ul>
