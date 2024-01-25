@@ -492,15 +492,22 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 </div>
 )}
 
-
- <Form.Control
-   style={{ width: '100%', height: '180px', fontSize: '15px', marginTop: '10px', borderRadius: '12px', whiteSpace: 'pre-line' }}
-   as="textarea"
-   rows={3}
-   placeholder="Escreva o conteúdo do item..."
-   onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
- />
-</div>
+<Form.Control
+      style={{
+        width: '100%',
+        height: '180px',
+        fontSize: '15px',
+        marginTop: '10px',
+        borderRadius: '12px',
+        whiteSpace: 'pre-line', // Permite quebras de linha
+      }}
+      as="textarea"
+      rows={3}
+      placeholder="Escreva o conteúdo do item..."
+      value={item.conteudo} // Certifique-se de que você está usando o value corretamente
+      onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
+    />
+  </div>
 ))}
 
 
