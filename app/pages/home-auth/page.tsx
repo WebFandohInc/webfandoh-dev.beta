@@ -520,7 +520,7 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
  size="lg" 
  style={{
    marginRight: '10px',
-   fontFamily: 'Raleway',
+   fontFamily: 'Raleway, arial',
    color: '#007BFF',
    backgroundColor: '#fff',
    border: '3px solid #007BFF',
@@ -538,7 +538,7 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
  size="lg" 
  style={{
    marginRight: '10px',
-   fontFamily: 'Raleway',
+   fontFamily: 'Raleway, arial',
    color: '#28A745',
    backgroundColor: '#fff',
    borderRadius: '20px',
@@ -578,10 +578,10 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
             </span>
           </Col>
           <Col>
-            <p style={{ fontFamily: 'Raleway', fontSize: '1.2rem', margin: 0, fontWeight: 'bold' }}>
+            <p style={{ fontFamily: 'Raleway, arial', fontSize: '1.2rem', margin: 0, fontWeight: 'bold' }}>
               Conteúdo publicado com sucesso!
             </p>
-            <p style={{ fontFamily: 'Raleway', fontSize: '1rem', margin: 0 }}>
+            <p style={{ fontFamily: 'Raleway, arial', fontSize: '1rem', margin: 0 }}>
               Parabéns, você fez algo incrível!
             </p>
           </Col>
