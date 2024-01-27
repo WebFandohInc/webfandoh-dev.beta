@@ -398,7 +398,7 @@ export default function HomeAuth () {
 )}
 
 
-<h3 className={`cover-title title-container`} style={{ color: '#373737', fontFamily: 'Raleway' }}>Título</h3>
+<h3 className={`cover-title title-container`} style={{ color: '#373737', fontWeight: 'bold', fontFamily: 'Raleway, arial' }}>Título</h3>
 
   
 <Form.Control 
