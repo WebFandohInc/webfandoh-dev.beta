@@ -354,7 +354,7 @@ export default function HomeAuth () {
   alt="Imagem Centralizada" 
   width={780} 
   height={250}
-  style={{ maxWidth: '100%', height: 'auto' }}
+  style={{ maxWidth: '100%', display: 'none', height: 'auto' }}
 />        
 <h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '530px', fontWeight: 'bold' }}>Capa</h1>
         <p className={styles.textLeft} style={{ marginRight: '35px' }}>
