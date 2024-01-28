@@ -356,7 +356,7 @@ export default function HomeAuth () {
   height={250}
   style={{ maxWidth: '100%', display: 'none', height: 'auto' }}
 />        
-<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '530px', fontWeight: 'bold' }}>Capa</h1>
+<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '330px', fontWeight: 'bold' }}>Capa</h1>
         <p className={styles.textLeft} style={{ marginRight: '35px' }}>
             ⚠️ A função de rascunho não está ativa no momento. <br />
             ⚠️ Poste seu conteúdo imediatamente assim que terminar para evitar perdas.
