@@ -356,11 +356,7 @@ export default function HomeAuth () {
   height={250}
   style={{ maxWidth: '100%', display: 'none', height: 'auto' }}
 />        
-<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '330px', fontWeight: 'bold' }}>Capa</h1>
-        <p className={styles.textLeft} style={{ marginRight: '35px' }}>
-            ⚠️ A função de rascunho não está ativa no momento. <br />
-            ⚠️ Poste seu conteúdo imediatamente assim que terminar para evitar perdas.
-        </p>        
+<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '330px', fontWeight: 'bold' }}>Capa</h1>       
         <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
         <Form.Control type="file" size="lg" onChange={handleFileChange} />
@@ -402,7 +398,7 @@ export default function HomeAuth () {
 
   
 <Form.Control 
-style={{width: "100%", maxWidth: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder', margin: '10px auto'}}
+style={{width: "90%", maxWidth: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder', margin: '10px auto'}}
 type="text" 
 placeholder="Criar título..." 
 className="mb-3"
@@ -413,7 +409,7 @@ onChange={(e) => setTituloLista(e.target.value)}
 <h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold'}}
 >Descrição</h3>
 <Form.Control  
-style={{width: "100%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
+style={{width: "90%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
 as="textarea" 
 rows={3} 
 placeholder="Escrever descrição sobre o seu conteúdo...." 
@@ -436,7 +432,7 @@ onChange={(e) => setDescricao(e.target.value)}
 <Form.Control
 style={{
  width: "100%",
- maxWidth: "580px",
+ maxWidth: "390px",
  height: "40px",
  fontSize: "15px",
  margin: "10px auto",
