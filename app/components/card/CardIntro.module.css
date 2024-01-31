@@ -8,12 +8,12 @@
 
 .listaCard {
     border: 1px solid #ffffff;
-    border-radius: 20px;
-    max-width: 500px;
+    border-radius: 14px;
+    max-width: 480px;
     height: auto; 
-    border: 1px solid #bcbcbc;
+    border: 1px solid #cdcdcd;
     margin: 20px auto;
-    box-shadow: 0 3px 0px #c2c2c2;
+    box-shadow: 0 3px 0px #d9d9d9;
 }
 
 @media (max-width: 768px) {
