@@ -16,6 +16,7 @@ import { useRouter } from 'next/router'
 
 import supabase from "@/app/service/supabase";
 
+import yourFeed from '../../../public/feedpng.png';
 import logoImage from '../../../public/logobranca.png';
 import criarListaImage from '../../../public/listapepople.png';
 import useSWR from "swr";
@@ -322,6 +323,7 @@ export default function HomeAuth () {
 
      {inicioClicado && (
         <div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: 'white', marginTop: '70px'}}>
+            <Image src={yourFeed.src} alt="Imagem Centralizada" width={300} height={120}/>
         </div>
      )}
 
@@ -354,7 +356,6 @@ export default function HomeAuth () {
   height={250}
   style={{ maxWidth: '100%', display: 'none', height: 'auto' }}
 />        
-
 <h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '300px', fontWeight: 'bold' }}>Capa</h1>       
         <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
@@ -418,7 +419,7 @@ onChange={(e) => setDescricao(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder', textAlign: 'left', maxWidth: '100%' }}>Tags</h3>
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder',}}>Tags</h3>
 <div className="d-flex flex-wrap mb-3">
 {tags.map((tag, index) => (
  <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
