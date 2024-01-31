@@ -115,8 +115,8 @@
   
 
 .lerMais {
-    background-color: #fff;
-    color: #165aa3;
+    background-color: #145588;
+    color: hsl(0, 0%, 100%);
     border: 2px solid rgb(33, 88, 131);
     padding: 8px 16px;
     box-shadow: 0 3px 0px #0d4168;
