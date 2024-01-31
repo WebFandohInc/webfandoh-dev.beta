@@ -16,7 +16,6 @@ import { useRouter } from 'next/router'
 
 import supabase from "@/app/service/supabase";
 
-import yourFeed from '../../../public/feedpng.png';
 import logoImage from '../../../public/logobranca.png';
 import criarListaImage from '../../../public/listapepople.png';
 import useSWR from "swr";
@@ -323,7 +322,6 @@ export default function HomeAuth () {
 
      {inicioClicado && (
         <div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: 'white', marginTop: '70px'}}>
-            <Image src={yourFeed.src} alt="Imagem Centralizada" width={300} height={120}/>
         </div>
      )}
 
