@@ -13,7 +13,7 @@
     height: auto; 
     border: 1px solid #bcbcbc;
     margin: 20px auto;
-    box-shadow: 0 4px 0px #c2c2c2;
+    box-shadow: 0 3px 0px #c2c2c2;
 }
 
 @media (max-width: 768px) {
@@ -96,7 +96,7 @@
     align-items: center;
     margin-right: 10px;
     background-color: #007bff;
-    color: #ffffff;
+    color: #165aa3;
     border: none;
     padding: 10px 15px;
     font-size: 1rem;
@@ -104,11 +104,11 @@
     border-radius: 15px;
     cursor: pointer;
     text-decoration: none;
-    box-shadow: 0 5px 1px rgba(68, 68, 68, 0.1);
+    box-shadow: 0 5px 0px rgba(68, 68, 68, 0.1);
 }
 
 .lerMais:hover {
-    background-color: #0056b3;
+    background-color: #165aa3;
 }
 
 
@@ -120,10 +120,10 @@
 
 .lerMais {
     background-color: #fff;
-    color: #1577c3;
-    border: 2px solid #1264A2;
+    color: #ffffff;
+    border: 2px solid rgb(33, 88, 131);
     padding: 8px 16px;
-    box-shadow: 0 3px 1px #0d4168;
+    box-shadow: 0 3px 0px #0d4168;
     border-radius: 15px;
   }
   
