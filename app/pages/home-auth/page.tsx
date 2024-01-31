@@ -356,7 +356,7 @@ export default function HomeAuth () {
   height={250}
   style={{ maxWidth: '100%', display: 'none', height: 'auto' }}
 />        
-<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '330px', fontWeight: 'bold' }}>Capa</h1>       
+<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '300px', fontWeight: 'bold' }}>Capa</h1>       
         <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
         <Form.Control type="file" size="lg" onChange={handleFileChange} />
@@ -394,7 +394,7 @@ export default function HomeAuth () {
 )}
 
 
-<h3 className={`cover-title title-container`} style={{ color: '#373737', fontWeight: 'bold', fontFamily: 'Raleway, arial' }}>Título</h3>
+<h3 className={`cover-title title-container`} style={{ color: '#373737', fontWeight: 'bold', fontFamily: 'Raleway, arial', textAlign: 'left', maxWidth: '100%' }}>Título</h3>
 
   
 <Form.Control 
@@ -406,8 +406,9 @@ onChange={(e) => setTituloLista(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold'}}
->Descrição</h3>
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold', textAlign: 'left', maxWidth: '100%' }}>
+  Descrição
+</h3>
 <Form.Control  
 style={{width: "90%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
 as="textarea" 
@@ -418,7 +419,7 @@ onChange={(e) => setDescricao(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder'}}>Tags</h3>
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder', textAlign: 'left', maxWidth: '100%' }}>Tags</h3>
 <div className="d-flex flex-wrap mb-3">
 {tags.map((tag, index) => (
  <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
@@ -432,7 +433,7 @@ onChange={(e) => setDescricao(e.target.value)}
 <Form.Control
 style={{
  width: "100%",
- maxWidth: "390px",
+ maxWidth: "350px",
  height: "40px",
  fontSize: "15px",
  margin: "10px auto",
