@@ -43,7 +43,7 @@ export default function CardIntro ({imgSrc, title, userImgSrc, userName, post}) 
                 <span>{userName}</span>
             </a>
             </div>
-            <Button className={styles.lerMais} onClick={handleShowModal}>Descobrir</Button>         
+            <Button className={styles.lerMais} onClick={handleShowModal}>Ler mais!</Button>         
         </div>
 
 
