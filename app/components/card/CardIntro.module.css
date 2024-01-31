@@ -107,10 +107,6 @@
     box-shadow: 0 5px 0px rgba(68, 68, 68, 0.1);
 }
 
-.lerMais:hover {
-    background-color: #165aa3;
-}
-
 
 .modalHeader  {
     color: rgb(16, 111, 226); /* ou qualquer outra cor desejada */
