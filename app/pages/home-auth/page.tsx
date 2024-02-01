@@ -20,6 +20,7 @@ import yourFeed from '../../../public/feedpng.png';
 import logoImage from '../../../public/logobranca.png';
 import criarListaImage from '../../../public/listapepople.png';
 import useSWR from "swr";
+import Head from "next/head";
 
 export default function HomeAuth () {
 
@@ -290,7 +291,13 @@ export default function HomeAuth () {
   
   return (
 
+    
       <Container fluid style={{ margin: 0, padding: 0, backgroundColor: 'white', overflow: 'hidden'}}>
+
+      <Head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3554757782177589" crossOrigin="anonymous"></script>
+      </Head>
+
         <Navbar bg="primary" variant="dark" expand="lg">
           <Container>
             <Navbar.Brand>
