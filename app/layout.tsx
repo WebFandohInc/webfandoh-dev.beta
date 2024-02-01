@@ -23,6 +23,7 @@ export default function RootLayout({
       <meta name="robots" content="index, follow"></meta>      
       <meta property="og:type" content="website"></meta>
       <link rel="icon" href="/favicon.ico" sizes="any" />
+      <link rel="icon" href="/app/favicon.ico" />
       <meta name="google-site-verification" content="9VJyIZjWIbiXrL0lfE75eWDvofIR-iOw5sC9eDE4Cls" />
       <link rel="icon" href="https://webfandoh.com/favicon.ico" />
       <meta name="keywords" content="conteúdo interativo, criação de conteúdo, plataforma de compartilhamento, WebFandoh, comunidade online, conteúdo personalizado, experiências online, interação na internet, descobrir conteúdo, compartilhar conteúdo, explorar conteúdo, mídia interativa, entretenimento online, comunidade de criadores, diversão online, conteúdo da internet, participação online, criação de mídia, redes sociais, interatividade online, conteúdo criativo, WebFandoh comunidade, descoberta de conteúdo, plataforma de entretenimento, mídia online, compartilhamento criativo, diversidade de conteúdo, experiências digitais"></meta>
