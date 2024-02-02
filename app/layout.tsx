@@ -28,9 +28,9 @@ export default function RootLayout({
         <meta property="og:site_name" content="WebFandoh"></meta>
         <meta property="og:locale" content="pt-br"></meta>
         <link rel="icon" href="/favicon.ico" sizes="any"></link>
-        <link rel="icon" href="/app/favicon.ico" />
-        <meta property="og:image" content="/public/logo.ico"></meta>
-        <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png"></link>
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:image" content="/logo.ico"></meta>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
 
         <link rel="icon" href="https://webfandoh.com/favicon.ico" />
         <meta name="keywords" content="conteúdo interativo, criação de conteúdo, plataforma de compartilhamento, WebFandoh, comunidade online, conteúdo personalizado, experiências online, interação na internet, descobrir conteúdo, compartilhar conteúdo, explorar conteúdo, mídia interativa, entretenimento online, comunidade de criadores, diversão online, conteúdo da internet, participação online, criação de mídia, redes sociais, interatividade online, conteúdo criativo, WebFandoh comunidade, descoberta de conteúdo, plataforma de entretenimento, mídia online, compartilhamento criativo, diversidade de conteúdo, experiências digitais"></meta>
