@@ -17,10 +17,13 @@ import LoginModal from './components/login-modal/LoginModal';
 import supabase from './service/supabase';
 import Head from 'next/head';
 
+
 export default function Home() {
-  
   const { data: dados, error } = useSWR('posts', async () => {
-    const { data, error } = await supabase.from('posts').select('*');
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .limit(5); // Altere para o número desejado de posts
     if (error) {
       console.error(error);
       throw new Error('Failed to fetch data');
@@ -53,8 +56,9 @@ export default function Home() {
     
     <Container fluid style={{ margin: 0, padding: 0, backgroundColor: 'white', overflow: 'hidden'}}>
 
+
         <Head>
-          
+ 
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3554757782177589" crossOrigin="anonymous"></script>
       </Head>
       
