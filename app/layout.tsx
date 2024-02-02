@@ -22,7 +22,7 @@ export default function RootLayout({
         <meta name="application-name" content="WebFandoh"></meta>
         <meta name="robots" content="index, follow"></meta>   
         <meta name="generator" content="WebFandoh"></meta>   
-        <link rel="icon" href="/app/favicon.ico" type="image/x-icon" sizes="56x56" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="56x56"></link>
         <meta property="og:type" content="website"></meta>
         <meta name="google-adsense-account" content="ca-pub-3554757782177589" />
         <meta property="og:site_name" content="WebFandoh"></meta>
