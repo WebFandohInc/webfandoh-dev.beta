@@ -348,221 +348,230 @@ export default function HomeAuth () {
 
     {escreverClicado && (
       
-        <div className="d-flex flex-column align-items-center" style={{ backgroundColor: 'white', marginTop: '10px'}}>
-<Image 
-  src={criarListaImage.src} 
-  alt="Imagem Centralizada" 
-  width={780} 
-  height={250}
-  style={{ maxWidth: '100%', height: 'auto' }}
-/>        
-<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '530px', fontWeight: 'bold' }}>Capa</h1>
-        <p className={styles.textLeft} style={{ marginRight: '35px' }}>
-            ⚠️ A função de rascunho não está ativa no momento. <br />
-            ⚠️ Poste seu conteúdo imediatamente assim que terminar para evitar perdas.
-        </p>        
-        <Form.Group controlId="formFileLg" className="mb-3">
-        <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
-        <Form.Control type="file" size="lg" onChange={handleFileChange} />
-        </Form.Group>
-
-        {imagemSelecionada && (
- <div className={`d-flex flex-column justify-content-center align-items-center ${styles.imageContainer}`} style={{ marginTop: '20px', padding: '15px' }}>
- <style jsx>{`
-   @media (max-width: 767px) {
-     .image-container {
-       width: 100%;
-       max-width: 400px;
-     }
-   }
-
-   @media (min-width: 768px) {
-     .image-container {
-       width: 100%;
-       max-width: 600px;
-     }
-   }
- `}</style>
-
- <div className="image-container">
-   <Image
-     src={imagemSelecionada}
-     alt="Imagem Selecionada"
-     layout="responsive"
-     width={600}
-     height={360}
-     style={{ borderRadius: '15px' }}
-   />
- </div>
-</div>
-)}
-
-
-<h3 className={`cover-title title-container`} style={{ color: '#373737', fontFamily: 'Raleway' }}>Título</h3>
-
-  
-<Form.Control 
-style={{width: "100%", maxWidth: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder', margin: '10px auto'}}
-type="text" 
-placeholder="Criar título..." 
-className="mb-3"
-onChange={(e) => setTituloLista(e.target.value)}
-/>
-
-
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold'}}
->Descrição</h3>
-<Form.Control  
-style={{width: "100%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
-as="textarea" 
-rows={3} 
-placeholder="Escrever descrição sobre o seu conteúdo...." 
-className="mb-3"
-onChange={(e) => setDescricao(e.target.value)}
-/>
-
-
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder'}}>Tags</h3>
-<div className="d-flex flex-wrap mb-3">
-{tags.map((tag, index) => (
- <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
-   <span className="mr-2" style={{marginRight: '10px'}}>{tag}</span>
-   <Button variant="outline-light" size="sm" onClick={() => handleRemoveTag(index)}>X</Button>
- </div>
-))}
-</div>
-   
- 
-<Form.Control
-style={{
- width: "100%",
- maxWidth: "580px",
- height: "40px",
- fontSize: "15px",
- margin: "10px auto",
-}}
-type="text"
-placeholder="Inclua tags relevantes, como filmes, aventura..."
-value={tagInput}
-onChange={handleTagInput}
-onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
-/>
 
 
 
-
-
-{itens.map((item) => (
-<div key={item.id} className="adicionar-item-container mt-3 p-3" style={{ border: '0px solid #ccc', borderRadius: '10px', marginBottom: '2rem', margin: 'auto', width: '100%', maxWidth: '610px' }}>
- <div className="d-flex justify-content-between">
-   <div>
-     <Button variant="danger" size="sm" style={{ fontWeight: 'bolder', borderRadius: '20' }} onClick={() => handleRemoverItem(item.id)}>
-       <BsTrash className="mr-2" /> Excluir
-     </Button>
-   </div>
-   <Form.Control style={{ width: '100%', maxWidth: '400px', fontSize: '18px', borderRadius: "8px", fontWeight: 'bolder', margin: '10px 0' }} type="text" placeholder="Título"
-     onChange={(e) => handleCampoItemChange(item.id, 'titulo', e.target.value)}
-   />
- </div>
-
- <Form.Group controlId={`formFileLg-${item.id}`} className="mt-3">
-  <Form.Label>Selecione uma imagem</Form.Label>
-  <Form.Control
-    type="file"
-    size="sm"
-    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAlterarImagemItem(item.id, e.target.files ? e.target.files[0] : null)}
-  />
-</Form.Group>
-
-
- {item.imagemUrl && (
-   <div className="d-flex flex-column align-items-center mt-3">
-<Image
- src={item.imagemUrl}
- alt={`Imagem do Item ${item.id}`}
- width={440}
- height={260}
- className="mb-2"
- style={{
-   borderRadius: '12%',  // Bordas redondas
-   overflow: 'hidden',
-   width: '100%',
- }}
-/>
-</div>
-)}
-
- <Form.Control
-   style={{ width: '100%', height: '180px', fontSize: '15px', marginTop: '10px', borderRadius: '12px' }}
-   as="textarea"
-   rows={3}
-   placeholder="Escreva o conteúdo do item..."
-   onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
- />
-</div>
-))}
-
-
-
-
-
-<div className="d-flex justify-content" style={{ width: '370px', marginTop: '20px' }}>
-   <Button 
- variant="primary" 
- size="lg" 
- style={{
-   marginRight: '10px',
-   fontFamily: 'Raleway',
-   color: '#007BFF',
-   backgroundColor: '#fff',
-   border: '3px solid #007BFF',
-   borderRadius: '20px',
-   fontWeight: 'bold',
- }}   
- onClick={handleAdicionarItem}
->
- <BsPlus className="mr-2"/> Item
-</Button>
-
-    
-<Button 
- variant="success" 
- size="lg" 
- style={{
-   marginRight: '10px',
-   fontFamily: 'Raleway',
-   color: '#28A745',
-   backgroundColor: '#fff',
-   borderRadius: '20px',
-   border: '3px solid #19692c',
-   fontWeight: 'bold',
- }}   
- onClick={handlePublicarLista}
->
- <BsShare className="mr-2" /> Publicar
-</Button>
-          </div>
-          
-          <Toast
-      show={cadastroRealizado}
-      onClose={toggleCadastroRealizado}
+      <div className="d-flex flex-column align-items-center" style={{ backgroundColor: 'white', marginTop: '10px'}}>
+      <Image 
+        src={criarListaImage.src} 
+        alt="Imagem Centralizada" 
+        width={780} 
+        height={250}
+        style={{ maxWidth: '100%', display: 'none', height: 'auto' }}
+      />        
+      <h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '300px', fontWeight: 'bold' }}>Capa</h1>       
+              <Form.Group controlId="formFileLg" className="mb-3">
+              <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
+              <Form.Control type="file" size="lg" onChange={handleFileChange} />
+              </Form.Group>
+      
+              {imagemSelecionada && (
+       <div className={`d-flex flex-column justify-content-center align-items-center ${styles.imageContainer}`} style={{ marginTop: '20px', padding: '15px' }}>
+       <style jsx>{`
+         @media (max-width: 767px) {
+           .image-container {
+             width: 100%;
+             max-width: 400px;
+           }
+         }
+      
+         @media (min-width: 768px) {
+           .image-container {
+             width: 100%;
+             max-width: 600px;
+           }
+         }
+       `}</style>
+      
+       <div className="image-container">
+         <Image
+           src={imagemSelecionada}
+           alt="Imagem Selecionada"
+           layout="responsive"
+           width={600}
+           height={360}
+           style={{ borderRadius: '15px' }}
+         />
+       </div>
+      </div>
+      )}
+      
+      
+      <h3 className={`cover-title title-container`} style={{ color: '#373737', fontWeight: 'bold', fontFamily: 'Raleway, arial', textAlign: 'left', maxWidth: '100%' }}>Título</h3>
+      
+        
+      <Form.Control 
+      style={{width: "90%", maxWidth: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder', margin: '10px auto'}}
+      type="text" 
+      placeholder="Criar título..." 
+      className="mb-3"
+      onChange={(e) => setTituloLista(e.target.value)}
+      />
+      
+      
+      <h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold', textAlign: 'left', maxWidth: '100%' }}>
+        Descrição
+      </h3>
+      <Form.Control  
+      style={{width: "90%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
+      as="textarea" 
+      rows={3} 
+      placeholder="Escrever descrição sobre o seu conteúdo...." 
+      className="mb-3"
+      onChange={(e) => setDescricao(e.target.value)}
+      />
+      
+      
+      <h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder',}}>Tags</h3>
+      <div className="d-flex flex-wrap mb-3">
+      {tags.map((tag, index) => (
+       <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
+         <span className="mr-2" style={{marginRight: '10px'}}>{tag}</span>
+         <Button variant="outline-light" size="sm" onClick={() => handleRemoveTag(index)}>X</Button>
+       </div>
+      ))}
+      </div>
+         
+       
+      <Form.Control
       style={{
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: '#B4E5A1', // Verde pastel
-        color: '#2E384D', // Cor de texto mais escura
-        zIndex: 9999,
-        borderRadius: '15px',
-        boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)',
-        padding: '20px',
-        maxWidth: '300px', // Tamanho ajustável conforme necessário
+       width: "100%",
+       maxWidth: "350px",
+       height: "40px",
+       fontSize: "15px",
+       margin: "10px auto",
       }}
-      delay={4000}
-      autohide
-    >
-      <Toast.Body>
+      type="text"
+      placeholder="Inclua tags relevantes, como filmes, aventura..."
+      value={tagInput}
+      onChange={handleTagInput}
+      onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
+      />
+      
+      
+      
+      
+      
+      {itens.map((item) => (
+      <div key={item.id} className="adicionar-item-container mt-3 p-3" style={{ border: '0px solid #ccc', borderRadius: '10px', marginBottom: '2rem', margin: 'auto', width: '100%', maxWidth: '610px' }}>
+       <div className="d-flex justify-content-between">
+         <div>
+           <Button variant="danger" size="sm" style={{ fontWeight: 'bolder', borderRadius: '20' }} onClick={() => handleRemoverItem(item.id)}>
+             <BsTrash className="mr-2" /> Excluir
+           </Button>
+         </div>
+         <Form.Control style={{ width: '100%', maxWidth: '400px', fontSize: '18px', borderRadius: "8px", fontWeight: 'bolder', margin: '10px 0' }} type="text" placeholder="Título"
+           onChange={(e) => handleCampoItemChange(item.id, 'titulo', e.target.value)}
+         />
+       </div>
+      
+       <Form.Group controlId={`formFileLg-${item.id}`} className="mt-3">
+        <Form.Label>Selecione uma imagem</Form.Label>
+        <Form.Control
+          type="file"
+          size="sm"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAlterarImagemItem(item.id, e.target.files ? e.target.files[0] : null)}
+        />
+      </Form.Group>
+      
+      
+       {item.imagemUrl && (
+         <div className="d-flex flex-column align-items-center mt-3">
+      <Image
+       src={item.imagemUrl}
+       alt={`Imagem do Item ${item.id}`}
+       width={440}
+       height={260}
+       className="mb-2"
+       style={{
+         borderRadius: '12%',  // Bordas redondas
+         overflow: 'hidden',
+         width: '100%',
+       }}
+      />
+      </div>
+      )}
+      
+      <Form.Control
+            style={{
+              width: '100%',
+              height: '180px',
+              fontSize: '15px',
+              marginTop: '10px',
+              borderRadius: '12px',
+              whiteSpace: 'pre-line', // Permite quebras de linha
+            }}
+            as="textarea"
+            rows={3}
+            placeholder="Escreva o conteúdo do item..."
+            value={item.conteudo} // Certifique-se de que você está usando o value corretamente
+            onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
+          />
+        </div>
+      ))}
+      
+      
+      
+      
+      
+      <div className="d-flex justify-content" style={{ width: '370px', marginTop: '20px' }}>
+         <Button 
+       variant="primary" 
+       size="lg" 
+       style={{
+         marginRight: '10px',
+         fontFamily: 'Raleway, arial',
+         color: '#007BFF',
+         backgroundColor: '#fff',
+         border: '3px solid #007BFF',
+         borderRadius: '20px',
+         fontWeight: 'bold',
+       }}   
+       onClick={handleAdicionarItem}
+      >
+       <BsPlus className="mr-2"/> Item
+      </Button>
+      
+          
+      <Button 
+       variant="success" 
+       size="lg" 
+       style={{
+         marginRight: '10px',
+         fontFamily: 'Raleway, arial',
+         color: '#28A745',
+         backgroundColor: '#fff',
+         borderRadius: '20px',
+         border: '3px solid #19692c',
+         fontWeight: 'bold',
+       }}   
+       onClick={handlePublicarLista}
+      >
+       <BsShare className="mr-2" /> Publicar
+      </Button>
+                </div>
+                
+                <Toast
+            show={cadastroRealizado}
+            onClose={toggleCadastroRealizado}
+            style={{
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              backgroundColor: '#B4E5A1', // Verde pastel
+              color: '#2E384D', // Cor de texto mais escura
+              zIndex: 9999,
+              borderRadius: '15px',
+              boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)',
+              padding: '20px',
+              maxWidth: '300px', // Tamanho ajustável conforme necessário
+            }}
+            delay={4000}
+            autohide
+          >
+      
+     <Toast.Body>
         <Row className="align-items-center">
           <Col xs="auto">
             <span role="img" aria-label="success-emoji" style={{ fontSize: '2.9rem', marginRight: '15px' }}>
@@ -570,10 +579,10 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
             </span>
           </Col>
           <Col>
-            <p style={{ fontFamily: 'Raleway', fontSize: '1.2rem', margin: 0, fontWeight: 'bold' }}>
+            <p style={{ fontFamily: 'Raleway, arial', fontSize: '1.2rem', margin: 0, fontWeight: 'bold' }}>
               Conteúdo publicado com sucesso!
             </p>
-            <p style={{ fontFamily: 'Raleway', fontSize: '1rem', margin: 0 }}>
+            <p style={{ fontFamily: 'Raleway, arial', fontSize: '1rem', margin: 0 }}>
               Parabéns, você fez algo incrível!
             </p>
           </Col>
