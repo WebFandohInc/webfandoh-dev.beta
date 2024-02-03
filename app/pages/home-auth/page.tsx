@@ -8,6 +8,9 @@ import CardIntro from "@/app/components/card/CardIntro";
 import { useCallback, useEffect, useState } from "react";
 import { FaPencilAlt, FaSignOutAlt } from 'react-icons/fa';
 import { BsImage, BsPlus, BsShare, BsTrash } from 'react-icons/bs';
+import { BsArrowDown } from 'react-icons/bs';
+import { FaChevronDown } from 'react-icons/fa';
+
 
 // import { Footer } from '../../components/footer/Footer';
 
@@ -47,8 +50,12 @@ export default function HomeAuth () {
   var userNameTest;
   var userPerfilURLTest;
 
-  const { data: dados, error } = useSWR('posts', async () => {
-    const { data, error } = await supabase.from('posts').select('*');
+  const [limit, setLimit] = useState(5); // Número inicial de posts a serem carregados
+  const { data: dados, error } = useSWR(['posts', limit], async () => {
+    const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .limit(limit);
     if (error) {
       console.error(error);
       throw new Error('Failed to fetch data');
@@ -163,6 +170,10 @@ export default function HomeAuth () {
     }
   };
   
+  const handleLoadMore = () => {
+    // Ao clicar em "Carregar mais", aumente o limite em 5
+    setLimit((prevLimit) => prevLimit + 5);
+  };
 
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
@@ -352,6 +363,19 @@ export default function HomeAuth () {
         />
       ))
     )}
+
+    <div className="d-flex justify-content-center align-items-center mt-4">
+        <Button
+         onClick={handleLoadMore}
+         disabled={loading}
+        variant="primary"
+        className="rounded-pill d-flex align-items-center"
+        style={{ backgroundColor: '#427BBE', border: 'none' }} // Altere as cores conforme seu design
+      >
+        <FaChevronDown className="me-2" style={{ fontSize: '1.2em', color: '#ffffff' }} />
+        <span style={{ fontWeight: 'bolder', color: '#ffffff' }}>Carregar mais</span>
+      </Button>
+      </div>
 
     {escreverClicado && (
       
