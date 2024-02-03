@@ -382,14 +382,11 @@ export default function HomeAuth () {
   height={150}
   style={{ maxWidth: '100%', height: 'auto' }}
 />        
-<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '530px', fontWeight: 'bold' }}>Capa</h1>
-        <p className={styles.textLeft} style={{ marginRight: '35px' }}>
-            ⚠️ Poste seu conteúdo imediatamente assim que terminar para evitar perdas.
-        </p>        
+<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '300px', fontWeight: 'bold' }}>Capa</h1>       
         <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
         <Form.Control type="file" size="lg" onChange={handleFileChange} />
-        </Form.Group>
+        </Form.Group>      
 
         {imagemSelecionada && (
  <div className={`d-flex flex-column justify-content-center align-items-center ${styles.imageContainer}`} style={{ marginTop: '20px', padding: '15px' }}>
@@ -409,7 +406,7 @@ export default function HomeAuth () {
    }
  `}</style>
 
- <div className="image-container">
+<div className="image-container">
    <Image
      src={imagemSelecionada}
      alt="Imagem Selecionada"
