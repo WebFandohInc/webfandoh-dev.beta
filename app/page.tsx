@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { BsArrowDown } from 'react-icons/bs';
 import { FaChevronDown } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
+import { FaSignInAlt } from 'react-icons/fa';
 
 
 import yourFeed from '../public/feedpng.png';
@@ -21,7 +23,7 @@ import Head from 'next/head';
 
 
 export default function Home() {
-  const [limit, setLimit] = useState(5); // Número inicial de posts a serem carregados
+  const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
   const { data: dados, error } = useSWR(['posts', limit], async () => {
     const { data, error } = await supabase
       .from('posts')
@@ -79,11 +81,11 @@ export default function Home() {
           <Navbar.Toggle aria-controls="navbar-nav" />
           <Navbar.Collapse id="navbar-nav" >
             <Nav className="ms-auto">
-              <Nav.Link className={`me-2 ${inicioClicado ? "active" : ""}`} onClick={() => setInicioClicado(true)}>
-                Início
+            <Nav.Link className={`me-2 ${inicioClicado ? "active" : ""} font-weight-bold`} onClick={() => setInicioClicado(true)}>
+                <FaHome className="me-1" /> Home
               </Nav.Link>
-              <Nav.Link onClick={() => handleLoginClick()}>
-                Fazer login
+              <Nav.Link onClick={() => handleLoginClick()} className="font-weight-bold">
+                <FaSignInAlt className="me-1" /> Fazer login/Cadastro
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

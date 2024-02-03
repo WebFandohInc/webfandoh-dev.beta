@@ -10,6 +10,7 @@ import { FaPencilAlt, FaSignOutAlt } from 'react-icons/fa';
 import { BsImage, BsPlus, BsShare, BsTrash } from 'react-icons/bs';
 import { BsArrowDown } from 'react-icons/bs';
 import { FaChevronDown } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 
 // import { Footer } from '../../components/footer/Footer';
 
@@ -319,16 +320,16 @@ export default function HomeAuth () {
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ms-auto">
                 <Nav.Link className={`me-2 ${inicioClicado ? "active" : ""}`} onClick={() => handleClickMenu('inicio')}>
-                    Início
-                </Nav.Link>
+                <FaHome className="me-1" /> <span style={{ fontWeight: 'bold' }}>Home</span>
+              </Nav.Link>
 
-                <Nav.Link className={`me-2 ${escreverClicado ? "active" : ""}`} onClick={() => handleClickMenu('escrever')}>
-                <FaPencilAlt className="me-1" /> Escrever
-                </Nav.Link>
+              <Nav.Link className={`me-2 ${escreverClicado ? "active" : ""}`} onClick={() => handleClickMenu('escrever')}>
+                <FaPencilAlt className="me-1" /> <span style={{ fontWeight: 'bold' }}>Criar</span>
+              </Nav.Link>
 
-                <Nav.Link className={`me-2 ${sairClicao ? "active" : ""}`} onClick={() => handleClickMenu('sair')}>
-                    <FaSignOutAlt className="me-1"/> Sair
-                </Nav.Link>
+              <Nav.Link className={`me-2 ${sairClicao ? "active" : ""}`} onClick={() => handleClickMenu('sair')}>
+                <FaSignOutAlt className="me-1" /> <span style={{ fontWeight: 'bold' }}>Sair</span>
+              </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -377,13 +378,12 @@ export default function HomeAuth () {
 <Image 
   src={criarListaImage.src} 
   alt="Imagem Centralizada" 
-  width={780} 
-  height={250}
+  width={680} 
+  height={150}
   style={{ maxWidth: '100%', height: 'auto' }}
 />        
 <h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '530px', fontWeight: 'bold' }}>Capa</h1>
         <p className={styles.textLeft} style={{ marginRight: '35px' }}>
-            ⚠️ A função de rascunho não está ativa no momento. <br />
             ⚠️ Poste seu conteúdo imediatamente assim que terminar para evitar perdas.
         </p>        
         <Form.Group controlId="formFileLg" className="mb-3">
@@ -427,7 +427,7 @@ export default function HomeAuth () {
 
   
 <Form.Control 
-style={{width: "100%", maxWidth: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder', margin: '10px auto'}}
+style={{width: "90%", maxWidth: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder', margin: '10px auto'}}
 type="text" 
 placeholder="Criar título..." 
 className="mb-3"
@@ -435,10 +435,11 @@ onChange={(e) => setTituloLista(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold'}}
->Descrição</h3>
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold', textAlign: 'left', maxWidth: '100%' }}>
+  Descrição
+</h3>
 <Form.Control  
-style={{width: "100%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
+style={{width: "90%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
 as="textarea" 
 rows={3} 
 placeholder="Escrever descrição sobre o seu conteúdo...." 
@@ -447,7 +448,7 @@ onChange={(e) => setDescricao(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder'}}>Tags</h3>
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder',}}>Tags</h3>
 <div className="d-flex flex-wrap mb-3">
 {tags.map((tag, index) => (
  <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
@@ -461,7 +462,7 @@ onChange={(e) => setDescricao(e.target.value)}
 <Form.Control
 style={{
  width: "100%",
- maxWidth: "580px",
+ maxWidth: "350px",
  height: "40px",
  fontSize: "15px",
  margin: "10px auto",
@@ -472,6 +473,7 @@ value={tagInput}
 onChange={handleTagInput}
 onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 />
+
 
 
 
@@ -490,6 +492,7 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
    />
  </div>
 
+
  <Form.Group controlId={`formFileLg-${item.id}`} className="mt-3">
   <Form.Label>Selecione uma imagem</Form.Label>
   <Form.Control
@@ -500,7 +503,7 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 </Form.Group>
 
 
- {item.imagemUrl && (
+{item.imagemUrl && (
    <div className="d-flex flex-column align-items-center mt-3">
 <Image
  src={item.imagemUrl}
@@ -517,15 +520,25 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 </div>
 )}
 
- <Form.Control
-   style={{ width: '100%', height: '180px', fontSize: '15px', marginTop: '10px', borderRadius: '12px' }}
-   as="textarea"
-   rows={3}
-   placeholder="Escreva o conteúdo do item..."
-   onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
- />
-</div>
+<Form.Control
+      style={{
+        width: '100%',
+        height: '180px',
+        fontSize: '15px',
+        marginTop: '10px',
+        borderRadius: '12px',
+        whiteSpace: 'pre-line', // Permite quebras de linha
+      }}
+      as="textarea"
+      rows={3}
+      placeholder="Escreva o conteúdo do item..."
+      value={item.conteudo} // Certifique-se de que você está usando o value corretamente
+      onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
+    />
+  </div>
 ))}
+
+
 
 
 
@@ -537,7 +550,7 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
  size="lg" 
  style={{
    marginRight: '10px',
-   fontFamily: 'Raleway',
+   fontFamily: 'Raleway, arial',
    color: '#007BFF',
    backgroundColor: '#fff',
    border: '3px solid #007BFF',
@@ -549,13 +562,13 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
  <BsPlus className="mr-2"/> Item
 </Button>
 
-    
+
 <Button 
  variant="success" 
  size="lg" 
  style={{
    marginRight: '10px',
-   fontFamily: 'Raleway',
+   fontFamily: 'Raleway, arial',
    color: '#28A745',
    backgroundColor: '#fff',
    borderRadius: '20px',
