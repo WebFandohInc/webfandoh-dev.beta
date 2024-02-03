@@ -6,7 +6,7 @@ import { Button, Col, Container, Nav, Navbar, Row, Form, Toast } from "react-boo
 import styles from './page.module.css';
 import CardIntro from "@/app/components/card/CardIntro";
 import { useCallback, useEffect, useState } from "react";
-import { FaPencilAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaChevronDown, FaPencilAlt, FaSignOutAlt } from 'react-icons/fa';
 import { BsImage, BsPlus, BsShare, BsTrash } from 'react-icons/bs';
 
 // import { Footer } from '../../components/footer/Footer';
@@ -47,6 +47,10 @@ export default function HomeAuth () {
   var userPerfilURLTest;
 
   const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
+  const [cachedData, setCachedData] = useState(null);
+  if (cachedData) {
+    return cachedData; // Se os dados estiverem em cache, use-os
+  }
   const { data: dados, error } = useSWR(['posts', limit], async () => {
     const { data, error } = await supabase
     .from('posts')
@@ -517,7 +521,18 @@ export default function HomeAuth () {
         </div>
       ))}
       
-      
+      <div className="d-flex justify-content-center align-items-center mt-4">
+        <Button
+         onClick={handleLoadMore}
+         disabled={loading}
+        variant="primary"
+        className="rounded-pill d-flex align-items-center"
+        style={{ backgroundColor: '#427BBE', border: 'none' }} // Altere as cores conforme seu design
+      >
+        <FaChevronDown className="me-2" style={{ fontSize: '1.2em', color: '#ffffff' }} />
+        <span style={{ fontWeight: 'bolder', color: '#ffffff' }}>Carregar mais</span>
+      </Button>
+      </div>
       
       
       
