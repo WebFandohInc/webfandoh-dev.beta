@@ -45,16 +45,6 @@ export default function Home() {
     setLimit((prevLimit) => prevLimit + 4);
   };
 
-  useEffect(() => {
-    const scrollToBottom = () => {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-      });
-    };
-    scrollToBottom();
-  }, [dados]);
-
   return (
     <Container fluid style={{ margin: 0, padding: 0, backgroundColor: 'white', overflow: 'hidden'}}>
       <Head>
