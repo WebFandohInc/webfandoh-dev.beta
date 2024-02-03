@@ -21,6 +21,9 @@ import Head from 'next/head';
 
 
 export default function Home() {
+  const [cachedData, setCachedData] = useState(null);
+
+  
   const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
   const { data: dados, error } = useSWR(['posts', limit], async () => {
     const { data, error } = await supabase
