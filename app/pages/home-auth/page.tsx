@@ -291,7 +291,7 @@ export default function HomeAuth () {
   };
   
   const handleLoadMore = () => {
-    // Ao clicar em "Carregar mais", aumente o limite em 5
+    // Ao clicar em "Carregar mais", aumente o limite em 4
     setLimit((prevLimit) => prevLimit + 4);
   };
   
