@@ -6,6 +6,8 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import CardIntro from './components/card/CardIntro';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
+import { BsArrowDown } from 'react-icons/bs';
+import { FaChevronDown } from 'react-icons/fa';
 
 
 import yourFeed from '../public/feedpng.png';
@@ -15,6 +17,8 @@ import LoginModal from './components/login-modal/LoginModal';
 
 // Supabase
 import supabase from './service/supabase';
+import Head from 'next/head';
+
 
 export default function Home() {
   
@@ -47,8 +51,13 @@ export default function Home() {
     setModalShow(true);
   };
 
+  
+
   return (
     <Container fluid style={{ margin: 0, padding: 0, backgroundColor: 'white', overflow: 'hidden'}}>
+            <Head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3554757782177589" crossOrigin="anonymous"></script>
+      </Head>
           <Navbar bg="primary" variant="dark" expand="lg">
           <Container>
             <Navbar.Brand>
