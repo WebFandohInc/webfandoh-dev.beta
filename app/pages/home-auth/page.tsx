@@ -8,9 +8,6 @@ import CardIntro from "@/app/components/card/CardIntro";
 import { useCallback, useEffect, useState } from "react";
 import { FaPencilAlt, FaSignOutAlt } from 'react-icons/fa';
 import { BsImage, BsPlus, BsShare, BsTrash } from 'react-icons/bs';
-import { BsArrowDown } from 'react-icons/bs';
-import { FaChevronDown } from 'react-icons/fa';
-
 
 // import { Footer } from '../../components/footer/Footer';
 
@@ -23,7 +20,6 @@ import yourFeed from '../../../public/feedpng.png';
 import logoImage from '../../../public/logobranca.png';
 import criarListaImage from '../../../public/listapepople.png';
 import useSWR from "swr";
-import Head from "next/head";
 
 export default function HomeAuth () {
 
@@ -50,12 +46,8 @@ export default function HomeAuth () {
   var userNameTest;
   var userPerfilURLTest;
 
-  const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
-  const { data: dados, error } = useSWR(['posts', limit], async () => {
-    const { data, error } = await supabase
-    .from('posts')
-    .select('*')
-    .limit(4);
+  const { data: dados, error } = useSWR('posts', async () => {
+    const { data, error } = await supabase.from('posts').select('*');
     if (error) {
       console.error(error);
       throw new Error('Failed to fetch data');
@@ -170,10 +162,6 @@ export default function HomeAuth () {
     }
   };
   
-  const handleLoadMore = () => {
-    // Ao clicar em "Carregar mais", aumente o limite em 5
-    setLimit((prevLimit) => prevLimit + 4);
-  };
 
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
@@ -302,13 +290,7 @@ export default function HomeAuth () {
   
   return (
 
-    
       <Container fluid style={{ margin: 0, padding: 0, backgroundColor: 'white', overflow: 'hidden'}}>
-
-      <Head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3554757782177589" crossOrigin="anonymous"></script>
-      </Head>
-
         <Navbar bg="primary" variant="dark" expand="lg">
           <Container>
             <Navbar.Brand>
@@ -364,19 +346,6 @@ export default function HomeAuth () {
       ))
     )}
 
-<div className="d-flex justify-content-center align-items-center mt-4">
-        <Button
-         onClick={handleLoadMore}
-         disabled={loading}
-        variant="primary"
-        className="rounded-pill d-flex align-items-center"
-        style={{ backgroundColor: '#427BBE', border: 'none' }} // Altere as cores conforme seu design
-      >
-        <FaChevronDown className="me-2" style={{ fontSize: '1.2em', color: '#ffffff' }} />
-        <span style={{ fontWeight: 'bolder', color: '#ffffff' }}>Carregar mais</span>
-      </Button>
-      </div>
-
     {escreverClicado && (
       
         <div className="d-flex flex-column align-items-center" style={{ backgroundColor: 'white', marginTop: '10px'}}>
@@ -385,9 +354,13 @@ export default function HomeAuth () {
   alt="Imagem Centralizada" 
   width={780} 
   height={250}
-  style={{ maxWidth: '100%', display: 'none', height: 'auto' }}
+  style={{ maxWidth: '100%', height: 'auto' }}
 />        
-<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '300px', fontWeight: 'bold' }}>Capa</h1>       
+<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '530px', fontWeight: 'bold' }}>Capa</h1>
+        <p className={styles.textLeft} style={{ marginRight: '35px' }}>
+            ⚠️ A função de rascunho não está ativa no momento. <br />
+            ⚠️ Poste seu conteúdo imediatamente assim que terminar para evitar perdas.
+        </p>        
         <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
         <Form.Control type="file" size="lg" onChange={handleFileChange} />
@@ -425,11 +398,11 @@ export default function HomeAuth () {
 )}
 
 
-<h3 className={`cover-title title-container`} style={{ color: '#373737', fontWeight: 'bold', fontFamily: 'Raleway, arial', textAlign: 'left', maxWidth: '100%' }}>Título</h3>
+<h3 className={`cover-title title-container`} style={{ color: '#373737', fontFamily: 'Raleway' }}>Título</h3>
 
   
 <Form.Control 
-style={{width: "90%", maxWidth: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder', margin: '10px auto'}}
+style={{width: "100%", maxWidth: "600px", height: "50px", fontSize: "15px", borderRadius: "12px",  fontWeight: 'bolder', margin: '10px auto'}}
 type="text" 
 placeholder="Criar título..." 
 className="mb-3"
@@ -437,11 +410,10 @@ onChange={(e) => setTituloLista(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold', textAlign: 'left', maxWidth: '100%' }}>
-  Descrição
-</h3>
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold'}}
+>Descrição</h3>
 <Form.Control  
-style={{width: "90%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
+style={{width: "100%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
 as="textarea" 
 rows={3} 
 placeholder="Escrever descrição sobre o seu conteúdo...." 
@@ -450,7 +422,7 @@ onChange={(e) => setDescricao(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder',}}>Tags</h3>
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder'}}>Tags</h3>
 <div className="d-flex flex-wrap mb-3">
 {tags.map((tag, index) => (
  <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
@@ -464,7 +436,7 @@ onChange={(e) => setDescricao(e.target.value)}
 <Form.Control
 style={{
  width: "100%",
- maxWidth: "350px",
+ maxWidth: "580px",
  height: "40px",
  fontSize: "15px",
  margin: "10px auto",
@@ -520,22 +492,14 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 </div>
 )}
 
-<Form.Control
-      style={{
-        width: '100%',
-        height: '180px',
-        fontSize: '15px',
-        marginTop: '10px',
-        borderRadius: '12px',
-        whiteSpace: 'pre-line', // Permite quebras de linha
-      }}
-      as="textarea"
-      rows={3}
-      placeholder="Escreva o conteúdo do item..."
-      value={item.conteudo} // Certifique-se de que você está usando o value corretamente
-      onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
-    />
-  </div>
+ <Form.Control
+   style={{ width: '100%', height: '180px', fontSize: '15px', marginTop: '10px', borderRadius: '12px' }}
+   as="textarea"
+   rows={3}
+   placeholder="Escreva o conteúdo do item..."
+   onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
+ />
+</div>
 ))}
 
 
@@ -548,7 +512,7 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
  size="lg" 
  style={{
    marginRight: '10px',
-   fontFamily: 'Raleway, arial',
+   fontFamily: 'Raleway',
    color: '#007BFF',
    backgroundColor: '#fff',
    border: '3px solid #007BFF',
@@ -566,7 +530,7 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
  size="lg" 
  style={{
    marginRight: '10px',
-   fontFamily: 'Raleway, arial',
+   fontFamily: 'Raleway',
    color: '#28A745',
    backgroundColor: '#fff',
    borderRadius: '20px',
@@ -606,10 +570,10 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
             </span>
           </Col>
           <Col>
-            <p style={{ fontFamily: 'Raleway, arial', fontSize: '1.2rem', margin: 0, fontWeight: 'bold' }}>
+            <p style={{ fontFamily: 'Raleway', fontSize: '1.2rem', margin: 0, fontWeight: 'bold' }}>
               Conteúdo publicado com sucesso!
             </p>
-            <p style={{ fontFamily: 'Raleway, arial', fontSize: '1rem', margin: 0 }}>
+            <p style={{ fontFamily: 'Raleway', fontSize: '1rem', margin: 0 }}>
               Parabéns, você fez algo incrível!
             </p>
           </Col>
