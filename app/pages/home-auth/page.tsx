@@ -175,16 +175,6 @@ export default function HomeAuth () {
     setLimit((prevLimit) => prevLimit + 4);
   };
 
-  useEffect(() => {
-    const scrollToBottom = () => {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-      });
-    };
-    scrollToBottom();
-  }, [dados]);
-
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
 
@@ -374,7 +364,7 @@ export default function HomeAuth () {
       ))
     )}
 
-    <div className="d-flex justify-content-center align-items-center mt-4">
+<div className="d-flex justify-content-center align-items-center mt-4">
         <Button
          onClick={handleLoadMore}
          disabled={loading}
