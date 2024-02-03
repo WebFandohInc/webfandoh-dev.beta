@@ -6,6 +6,7 @@ import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import CardIntro from './components/card/CardIntro';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
+import { BsArrowDown } from 'react-icons/bs';
 
 
 import yourFeed from '../public/feedpng.png';
@@ -107,9 +108,16 @@ export default function Home() {
               post={post}
             />
           ))}
-          <div className="d-flex justify-content-center align-items-center">
-            <Button onClick={handleLoadMore} disabled={loading}>Carregar mais</Button>
-          </div>
+        <div className="d-flex justify-content-center align-items-center mt-4">
+      <Button
+          onClick={handleLoadMore}
+          disabled={loading}
+          variant="primary"
+          className="rounded-pill d-flex align-items-center"
+          >  
+       <BsArrowDown className="me-2" /> Carregar mais...
+      </Button>
+      </div>
         </>
       )}
       <LoginModal show={modalShow} onHide={() => setModalShow(false)} />
