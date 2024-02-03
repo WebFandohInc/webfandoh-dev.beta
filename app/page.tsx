@@ -7,6 +7,7 @@ import CardIntro from './components/card/CardIntro';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { BsArrowDown } from 'react-icons/bs';
+import { FaChevronDown } from 'react-icons/fa';
 
 
 import yourFeed from '../public/feedpng.png';
@@ -109,13 +110,15 @@ export default function Home() {
             />
           ))}
         <div className="d-flex justify-content-center align-items-center mt-4">
-      <Button
-          onClick={handleLoadMore}
-          disabled={loading}
-          variant="primary"
-          className="rounded-pill d-flex align-items-center roboto-font bold-text"
-          >  
-       <BsArrowDown className="me-2" /> Carregar mais...
+        <Button
+         onClick={handleLoadMore}
+         disabled={loading}
+        variant="primary"
+        className="rounded-pill d-flex align-items-center"
+        style={{ backgroundColor: '#427BBE', border: 'none' }} // Altere as cores conforme seu design
+      >
+        <FaChevronDown className="me-2" style={{ fontSize: '1.2em', color: '#ffffff' }} />
+        <span style={{ fontWeight: 'bolder', color: '#ffffff' }}>Carregar mais</span>
       </Button>
       </div>
         </>
