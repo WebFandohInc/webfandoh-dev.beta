@@ -84,9 +84,9 @@ export default function Home() {
             <Nav.Link className={`me-2 ${inicioClicado ? "active" : ""} font-weight-bolder`} onClick={() => setInicioClicado(true)}>
                 <FaHome className="me-1" /> Home
               </Nav.Link>
-              <Nav.Link onClick={() => handleLoginClick()} className="font-weight-bolder">
-                <FaSignInAlt className="me-1" /> Fazer login/Cadastro
-              </Nav.Link>
+              <Nav.Link onClick={() => handleLoginClick()} style={{ fontWeight: 'bold' }}>
+             <FaSignInAlt className="me-1" /> Entrar / Cadastre-se
+             </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
