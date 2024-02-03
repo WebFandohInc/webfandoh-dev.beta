@@ -113,7 +113,7 @@ export default function Home() {
           onClick={handleLoadMore}
           disabled={loading}
           variant="primary"
-          className="rounded-pill d-flex align-items-center"
+          className="rounded-pill d-flex align-items-center roboto-font bold-text"
           >  
        <BsArrowDown className="me-2" /> Carregar mais...
       </Button>
