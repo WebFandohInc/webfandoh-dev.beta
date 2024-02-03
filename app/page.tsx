@@ -81,10 +81,10 @@ export default function Home() {
           <Navbar.Toggle aria-controls="navbar-nav" />
           <Navbar.Collapse id="navbar-nav" >
             <Nav className="ms-auto">
-            <Nav.Link className={`me-2 ${inicioClicado ? "active" : ""} font-weight-bold`} onClick={() => setInicioClicado(true)}>
+            <Nav.Link className={`me-2 ${inicioClicado ? "active" : ""} font-weight-bolder`} onClick={() => setInicioClicado(true)}>
                 <FaHome className="me-1" /> Home
               </Nav.Link>
-              <Nav.Link onClick={() => handleLoginClick()} className="font-weight-bold">
+              <Nav.Link onClick={() => handleLoginClick()} className="font-weight-bolder">
                 <FaSignInAlt className="me-1" /> Fazer login/Cadastro
               </Nav.Link>
             </Nav>
