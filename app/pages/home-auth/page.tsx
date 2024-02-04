@@ -442,43 +442,60 @@ onChange={(e) => setTituloLista(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px', fontWeight: 'bold', textAlign: 'left', maxWidth: '100%' }}>
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '20px', fontWeight: 'bold', textAlign: 'left', maxWidth: '100%' }}>
   Descrição
 </h3>
-<Form.Control  
-style={{width: "90%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
-as="textarea" 
-rows={3} 
-placeholder="Escrever descrição sobre o seu conteúdo...." 
-className="mb-3"
-onChange={(e) => setDescricao(e.target.value)}
+
+<Form.Control
+  style={{
+    width: '90%',
+    maxWidth: '600px',
+    fontSize: '15px',
+    borderRadius: '12px',
+    margin: '10px auto',
+  }}
+  as="textarea"
+  rows={3}
+  placeholder="Escrever descrição sobre o seu conteúdo...."
+  className="mb-3"
+  onChange={(e) => setDescricao(e.target.value)}
+  autoFocus  // Ativa a detecção automática de links
+  autoComplete="off"  // Desativa sugestões de texto
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginTop: '10px',fontWeight: 'bolder',}}>Tags</h3>
-<div className="d-flex flex-wrap mb-3">
+
+<h3 className="cover-title" style={{ color: '#373737', marginTop: '20px', fontWeight: 'bold', fontFamily: 'Raleway, arial', textAlign: 'left', maxWidth: '100%' }}>
+  Tags
+</h3>
+<div className="d-flex flex-wrap align-items-center mb-3">
 {tags.map((tag, index) => (
- <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
-   <span className="mr-2" style={{marginRight: '10px'}}>{tag}</span>
-   <Button variant="outline-light" size="sm" onClick={() => handleRemoveTag(index)}>X</Button>
- </div>
-))}
+    <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
+      <span className="mr-2" style={{ marginRight: '10px', fontSize: '14px' }}>{tag}</span>
+      <Button variant="outline-light" size="sm" onClick={() => handleRemoveTag(index)} style={{ fontSize: '12px' }}>
+        X
+      </Button>
+    </div>
+  ))}
 </div>
    
  
 <Form.Control
-style={{
- width: "100%",
- maxWidth: "350px",
- height: "40px",
- fontSize: "15px",
- margin: "10px auto",
-}}
-type="text"
-placeholder="Inclua tags relevantes, como filmes, aventura..."
-value={tagInput}
-onChange={handleTagInput}
-onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
+  style={{
+    width: '100%',
+    maxWidth: '350px',
+    height: '40px',
+    fontSize: '15px',
+    margin: '10px auto',
+    borderRadius: '10px',
+    border: '1px solid #ccc',
+    paddingLeft: '10px',
+  }}
+  type="text"
+  placeholder="Inclua tags relevantes, como filmes, aventura..."
+  value={tagInput}
+  onChange={handleTagInput}
+  onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 />
 
 
@@ -487,62 +504,78 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 
 
 {itens.map((item) => (
-<div key={item.id} className="adicionar-item-container mt-3 p-3" style={{ border: '0px solid #ccc', borderRadius: '10px', marginBottom: '2rem', margin: 'auto', width: '100%', maxWidth: '610px' }}>
- <div className="d-flex justify-content-between">
-   <div>
-     <Button variant="danger" size="sm" style={{ fontWeight: 'bolder', borderRadius: '20' }} onClick={() => handleRemoverItem(item.id)}>
-       <BsTrash className="mr-2" /> Excluir
-     </Button>
+  <div key={item.id} className="adicionar-item-container mt-3 p-3" style={{ border: '1px solid #ccc', borderRadius: '10px', marginBottom: '2rem', margin: 'auto', width: '100%', maxWidth: '610px' }}>
+    <div className="d-flex justify-content-between align-items-center">
+    <div>
+        <Button variant="danger" size="sm" style={{ borderRadius: '20', background: '#fff', border: 'none' }} onClick={() => handleRemoverItem(item.id)}>
+          <BsTrash className="me-1" style={{ color: 'red' }} /> Excluir
+        </Button>
    </div>
-   <Form.Control style={{ width: '100%', maxWidth: '400px', fontSize: '18px', borderRadius: "8px", fontWeight: 'bolder', margin: '10px 0' }} type="text" placeholder="Título"
-     onChange={(e) => handleCampoItemChange(item.id, 'titulo', e.target.value)}
-   />
+   <Form.Control
+          style={{ width: '100%', fontSize: '18px', borderRadius: '8px', fontWeight: 'bolder' }}
+          type="text"
+          placeholder="Título"
+          onChange={(e) => handleCampoItemChange(item.id, 'titulo', e.target.value)}
+        />
  </div>
 
 
- <Form.Group controlId={`formFileLg-${item.id}`} className="mt-3">
-  <Form.Label>Selecione uma imagem</Form.Label>
-  <Form.Control
-    type="file"
-    size="sm"
-    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAlterarImagemItem(item.id, e.target.files ? e.target.files[0] : null)}
-  />
+
+ 
+<Form.Group controlId={`formFileLg-${item.id}`} className="mt-3">
+  <Form.Label className="mb-2">Selecione uma imagem</Form.Label>
+  <div className="custom-file">
+    <input
+      type="file"
+      className="custom-file-input"
+      id={`customFile-${item.id}`}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAlterarImagemItem(item.id, e.target.files ? e.target.files[0] : null)}
+    />
+    <label className="custom-file-label" htmlFor={`customFile-${item.id}`}>
+      Enviar imagem do item
+    </label>
+  </div>
 </Form.Group>
 
 
 {item.imagemUrl && (
   <div className="d-flex flex-column align-items-center mt-3">
-    <Image
-      src={item.imagemUrl}
-      alt={`Imagem do Item ${item.id}`}
-      width={440}
-      height={260}
-      className="mb-2"
-      style={{
-        borderRadius: '12%',  // Bordas redondas
-        overflow: 'hidden',
-        width: '100%',
-        height: 'auto',  // Altura automática para manter a proporção
-      }}
-    />
-  </div>
+  <Image
+    src={item.imagemUrl}
+    alt={`Imagem do Item ${item.id}`}
+    width={440}
+    height={260}
+    className="mb-3"  // Aumentei a margem inferior para mais espaçamento
+    style={{
+      borderRadius: '12%',  // Bordas redondas
+      overflow: 'hidden',
+      width: '100%',  // Largura de 100% para se ajustar ao contêiner
+      height: 'auto',  // Altura automática para manter a proporção
+      margin: '10px 0',  // Adicionei margem para espaçamento superior
+    }}
+  />
+</div>
 )}
 
 <Form.Control
-      style={{
-        width: '100%',
-        height: '180px',
-        fontSize: '15px',
-        marginTop: '10px',
-        borderRadius: '12px',
-        whiteSpace: 'pre-line', // Permite quebras de linha
-      }}
-      as="textarea"
-      rows={3}
-      placeholder="Escreva o conteúdo do item..."
-      value={item.conteudo} // Certifique-se de que você está usando o value corretamente
-      onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
-    />
+  style={{
+    width: '100%',
+    height: '180px',
+    fontSize: '15px',
+    marginTop: '10px',
+    borderRadius: '12px',
+    whiteSpace: 'pre-line', // Permite quebras de linha
+    border: '1px solid #ced4da', // Adiciona uma borda sutil
+    padding: '10px', // Adiciona preenchimento interno para melhorar a aparência
+    fontFamily: 'Roboto, sans-serif', // Use uma fonte padrão mais comum
+    resize: 'vertical', // Permite a redimensionamento vertical
+  }}
+  as="textarea"
+  rows={3}
+  placeholder="Escreva o conteúdo do item..."
+  value={item.conteudo}
+  onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
+/>
   </div>
 ))}
 
@@ -554,10 +587,10 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 
 <div className="d-flex justify-content" style={{ width: '370px', marginTop: '20px' }}>
 
- <Button 
+<Button 
  variant="primary" 
  size="lg" 
- className={`btn-custom ${styles.actionButton}`}
+ className={`btn-custom ${styles.actionButton} rounded-pill p-3`}
  onClick={handleAdicionarItem}
 >
  <BsPlus className="me-2"/> Adicionar Item
@@ -566,7 +599,7 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 <Button 
  variant="success" 
  size="lg" 
- className={`btn-custom ${styles.actionButton}`}
+ className={`btn-custom ${styles.actionButton} rounded-pill p-3 ms-2`}
  onClick={handlePublicarLista}
 >
  <BsShare className="me-2" /> Publicar
