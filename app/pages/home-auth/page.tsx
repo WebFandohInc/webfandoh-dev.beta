@@ -55,6 +55,7 @@ export default function HomeAuth () {
     const { data, error } = await supabase
       .from('posts')
       .select('*')
+      .order('data_publicacao', { ascending: false })
       .limit(limit);
       if (error) {
       console.error(error);
