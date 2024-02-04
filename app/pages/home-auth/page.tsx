@@ -55,7 +55,6 @@ export default function HomeAuth () {
     const { data, error } = await supabase
       .from('posts')
       .select('*')
-      .order('data_publicacao', { ascending: false })
       .limit(limit);
       if (error) {
       console.error(error);
@@ -382,12 +381,22 @@ export default function HomeAuth () {
   width={680} 
   height={150}
   style={{ maxWidth: '100%', height: 'auto' }}
-/>        
-<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '300px', fontWeight: 'bold' }}>Capa</h1>       
+
+
+
+/>      
+
+
+
+
+<h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '300px', fontWeight: 'bold' }}>Capa</h1>   
+
+
         <Form.Group controlId="formFileLg" className="mb-3">
         <Form.Label>Adicione a imagem de capa para o seu conteúdo.</Form.Label>
         <Form.Control type="file" size="lg" onChange={handleFileChange} />
         </Form.Group>      
+        
 
         {imagemSelecionada && (
  <div className={`d-flex flex-column justify-content-center align-items-center ${styles.imageContainer}`} style={{ marginTop: '20px', padding: '15px' }}>
@@ -502,20 +511,21 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 
 
 {item.imagemUrl && (
-   <div className="d-flex flex-column align-items-center mt-3">
-<Image
- src={item.imagemUrl}
- alt={`Imagem do Item ${item.id}`}
- width={440}
- height={260}
- className="mb-2"
- style={{
-   borderRadius: '12%',  // Bordas redondas
-   overflow: 'hidden',
-   width: '100%',
- }}
-/>
-</div>
+  <div className="d-flex flex-column align-items-center mt-3">
+    <Image
+      src={item.imagemUrl}
+      alt={`Imagem do Item ${item.id}`}
+      width={440}
+      height={260}
+      className="mb-2"
+      style={{
+        borderRadius: '12%',  // Bordas redondas
+        overflow: 'hidden',
+        width: '100%',
+        height: 'auto',  // Altura automática para manter a proporção
+      }}
+    />
+  </div>
 )}
 
 <Form.Control
@@ -543,78 +553,65 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 
 
 <div className="d-flex justify-content" style={{ width: '370px', marginTop: '20px' }}>
-   <Button 
+
+ <Button 
  variant="primary" 
  size="lg" 
- style={{
-   marginRight: '10px',
-   fontFamily: 'Raleway, arial',
-   color: '#007BFF',
-   backgroundColor: '#fff',
-   border: '3px solid #007BFF',
-   borderRadius: '20px',
-   fontWeight: 'bold',
- }}   
+ className={`btn-custom ${styles.actionButton}`}
  onClick={handleAdicionarItem}
 >
- <BsPlus className="mr-2"/> Item
+ <BsPlus className="me-2"/> Adicionar Item
 </Button>
-
 
 <Button 
  variant="success" 
  size="lg" 
- style={{
-   marginRight: '10px',
-   fontFamily: 'Raleway, arial',
-   color: '#28A745',
-   backgroundColor: '#fff',
-   borderRadius: '20px',
-   border: '3px solid #19692c',
-   fontWeight: 'bold',
- }}   
+ className={`btn-custom ${styles.actionButton}`}
  onClick={handlePublicarLista}
 >
- <BsShare className="mr-2" /> Publicar
+ <BsShare className="me-2" /> Publicar
 </Button>
+
+
           </div>
           
           <Toast
-      show={cadastroRealizado}
-      onClose={toggleCadastroRealizado}
-      style={{
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: '#B4E5A1', // Verde pastel
-        color: '#2E384D', // Cor de texto mais escura
-        zIndex: 9999,
-        borderRadius: '15px',
-        boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)',
-        padding: '20px',
-        maxWidth: '300px', // Tamanho ajustável conforme necessário
-      }}
-      delay={4000}
-      autohide
-    >
-      <Toast.Body>
-        <Row className="align-items-center">
-          <Col xs="auto">
-            <span role="img" aria-label="success-emoji" style={{ fontSize: '2.9rem', marginRight: '15px' }}>
-            🎉
-            </span>
-          </Col>
-          <Col>
-            <p style={{ fontFamily: 'Raleway', fontSize: '1.2rem', margin: 0, fontWeight: 'bold' }}>
-              Conteúdo publicado com sucesso!
-            </p>
-            <p style={{ fontFamily: 'Raleway', fontSize: '1rem', margin: 0 }}>
-              Parabéns, você fez algo incrível!
-            </p>
-          </Col>
-        </Row>
-      </Toast.Body>
+        show={cadastroRealizado}
+        onClose={toggleCadastroRealizado}
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          backgroundColor: '#B4E5A1',
+          color: '#2E384D',
+          zIndex: 9999,
+          borderRadius: '15px',
+          boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)',
+          padding: '20px',
+          maxWidth: '300px',
+        }}
+        delay={4000}
+        autohide
+      >
+
+   <Toast.Body>
+          <Row className="align-items-center">
+            <Col xs="auto">
+              <span role="img" aria-label="success-emoji" style={{ fontSize: '2.9rem', marginRight: '15px' }}>
+                🎉
+              </span>
+            </Col>
+            <Col>
+              <p style={{ fontFamily: 'Raleway', fontSize: '1.2rem', margin: 0, fontWeight: 'bold' }}>
+                Conteúdo publicado com sucesso!
+              </p>
+              <p style={{ fontFamily: 'Raleway', fontSize: '1rem', margin: 0 }}>
+                Parabéns, você fez algo incrível!
+              </p>
+            </Col>
+          </Row>
+        </Toast.Body>
     </Toast>
 
       </div>
