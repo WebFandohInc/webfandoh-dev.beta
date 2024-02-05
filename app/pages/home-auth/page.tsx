@@ -339,9 +339,14 @@ export default function HomeAuth () {
       </Navbar>
 
      {inicioClicado && (
-        <div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: 'white', marginTop: '70px'}}>
-            <Image src={yourFeed.src} alt="Imagem Centralizada" width={300} height={120}/>
-        </div>
+        <div className="d-flex justify-content-center align-items-center" style={{ display: 'none', backgroundColor: 'white', marginTop: '70px'}}>
+<Image
+  src={yourFeed.src}
+  alt="Imagem Centralizada"
+  width={300}
+  height={120}
+  style={{ display: 'none' }}
+/>        </div>
      )}
 
     {loading ? (
