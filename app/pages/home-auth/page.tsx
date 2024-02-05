@@ -51,12 +51,12 @@ export default function HomeAuth () {
   var userPerfilURLTest;
 
   
-  const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
+  const [limit, setLimit] = useState(5); // Número inicial de posts a serem carregados
   const { data: dados, error } = useSWR(['posts', limit], async () => {
     const { data, error } = await supabase
       .from('posts')
       .select('*')
-      .limit(4);
+      .limit(limit);
     if (error) {
       console.error(error);
       throw new Error('Failed to fetch data');
@@ -295,8 +295,10 @@ export default function HomeAuth () {
   };
   
   const handleLoadMore = () => {
-    // Ao clicar em "Carregar mais", aumente o limite em 5
-    setLimit((prevLimit) => prevLimit + 4);
+    setLimit((prevLimit) => {
+      console.log('Prev Limit:', prevLimit);
+      return prevLimit + 5;
+    });
   };
 
   
@@ -361,16 +363,9 @@ export default function HomeAuth () {
       ))
     )}
   <div className="d-flex justify-content-center align-items-center mt-4">
-        <Button
-         onClick={handleLoadMore}
-         disabled={loading}
-        variant="primary"
-        className="rounded-pill d-flex align-items-center"
-        style={{ backgroundColor: '#427BBE', border: 'none' }} // Altere as cores conforme seu design
-      >
-        <FaChevronDown className="me-2" style={{ fontSize: '1.2em', color: '#ffffff' }} />
-        <span style={{ fontWeight: 'bolder', color: '#ffffff' }}>Carregar mais</span>
-      </Button>
+  <div className="d-flex justify-content-center align-items-center">
+            <Button onClick={handleLoadMore} disabled={loading}>Carregar mais</Button>
+          </div>
       </div>
       
     {escreverClicado && (
