@@ -24,8 +24,12 @@ import Head from 'next/head';
 
 export default function Home() {
   
-  const { data: dados, error } = useSWR('posts', async () => {
-    const { data, error } = await supabase.from('posts').select('*');
+  const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
+  const { data: dados, error } = useSWR(['posts', limit], async () => {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .limit(4);
     if (error) {
       console.error(error);
       throw new Error('Failed to fetch data');
@@ -53,6 +57,10 @@ export default function Home() {
     setModalShow(true);
   };
 
+  const handleLoadMore = () => {
+    // Ao clicar em "Carregar mais", aumente o limite em 5
+    setLimit((prevLimit) => prevLimit + 4);
+  };
 
   return (
     <Container fluid style={{ margin: 0, padding: 0, backgroundColor: 'white', overflow: 'hidden'}}>
@@ -105,7 +113,9 @@ export default function Home() {
             />
           ))}
         <div className="d-flex justify-content-center align-items-center mt-4">
-
+        <div className="d-flex justify-content-center align-items-center">
+            <Button onClick={handleLoadMore} disabled={loading}>Carregar mais</Button>
+          </div>
       </div>
         </>
       )}

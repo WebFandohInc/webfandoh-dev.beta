@@ -50,18 +50,18 @@ export default function HomeAuth () {
   var userNameTest;
   var userPerfilURLTest;
 
+  
   const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
   const { data: dados, error } = useSWR(['posts', limit], async () => {
     const { data, error } = await supabase
       .from('posts')
       .select('*')
-      .limit(limit);
-      if (error) {
+      .limit(4);
+    if (error) {
       console.error(error);
       throw new Error('Failed to fetch data');
     }
     return data;
-    
   });
 
   const loading = !dados;
@@ -298,6 +298,7 @@ export default function HomeAuth () {
     // Ao clicar em "Carregar mais", aumente o limite em 5
     setLimit((prevLimit) => prevLimit + 4);
   };
+
   
   return (
 
@@ -359,7 +360,7 @@ export default function HomeAuth () {
         />
       ))
     )}
-   <div className="d-flex justify-content-center align-items-center mt-4">
+  <div className="d-flex justify-content-center align-items-center mt-4">
         <Button
          onClick={handleLoadMore}
          disabled={loading}
