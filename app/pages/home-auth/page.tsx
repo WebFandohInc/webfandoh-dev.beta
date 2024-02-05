@@ -420,7 +420,7 @@ export default function HomeAuth () {
 )}
 
 
-<h3 className={`cover-title title-container`} style={{ color: '#373737', fontWeight: 'bold', marginRight: '300px', fontFamily: 'Raleway, arial', textAlign: 'left', maxWidth: '100%' }}>Título</h3>
+<h3 className={`cover-title title-container`} style={{ color: '#373737', fontWeight: 'bold', marginRight: '350px', fontFamily: 'Raleway, arial', textAlign: 'left', maxWidth: '100%' }}>Título</h3>
 
   
 <Form.Control 
@@ -436,7 +436,7 @@ onChange={(e) => setTituloLista(e.target.value)}
   Descrição
 </h3>
 <Form.Control  
-style={{width: "90%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
+style={{width: "100%", maxWidth: "600px", height: "100px", fontSize: "15px", borderRadius: "12px", margin: '10px auto'}} 
 as="textarea" 
 rows={3} 
 placeholder="Escrever descrição sobre o seu conteúdo...." 
@@ -445,7 +445,7 @@ onChange={(e) => setDescricao(e.target.value)}
 />
 
 
-<h3 className="cover-title" style={{ color: '#373737', marginRight: '300px', marginTop: '10px',fontWeight: 'bolder',}}>Tags</h3>
+<h3 className="cover-title" style={{ color: '#373737', marginRight: '355px', marginTop: '10px',fontWeight: 'bolder',}}>Tags</h3>
 <div className="d-flex flex-wrap mb-3">
 {tags.map((tag, index) => (
  <div key={index} className="tag-item d-flex align-items-center bg-primary text-white p-2 rounded m-2">
@@ -459,8 +459,8 @@ onChange={(e) => setDescricao(e.target.value)}
 <Form.Control
 style={{
  width: "100%",
- maxWidth: "350px",
- height: "40px",
+ maxWidth: "590px",
+ height: "80px",
  fontSize: "15px",
  margin: "10px auto",
 }}
