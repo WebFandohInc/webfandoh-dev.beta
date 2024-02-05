@@ -28,7 +28,7 @@ export default function Home() {
     const { data, error } = await supabase
       .from('posts')
       .select('*')
-      .limit(limit);
+      .limit(4);
     if (error) {
       console.error(error);
       throw new Error('Failed to fetch data');
