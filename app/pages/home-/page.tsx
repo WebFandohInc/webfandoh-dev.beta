@@ -51,7 +51,7 @@ export default function HomeAuth () {
   var userPerfilURLTest;
 
   
-  const [limit, setLimit] = useState(5); // Número inicial de posts a serem carregados
+  const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
   const { data: dados, error } = useSWR(['posts', limit], async () => {
     const { data, error } = await supabase
       .from('posts')
@@ -297,7 +297,7 @@ export default function HomeAuth () {
   const handleLoadMore = () => {
     setLimit((prevLimit) => {
       console.log('Prev Limit:', prevLimit);
-      return prevLimit + 5;
+      return prevLimit + 4;
     });
   };
 
@@ -422,6 +422,7 @@ export default function HomeAuth () {
 
 
 <h3 className={`cover-title title-container`} style={{ color: '#373737', fontWeight: 'bold', marginRight: '300px', fontFamily: 'Raleway, arial', textAlign: 'left', maxWidth: '100%' }}>Título</h3>
+
 
   
 <Form.Control 

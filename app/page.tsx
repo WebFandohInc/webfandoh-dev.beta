@@ -24,7 +24,7 @@ import Head from 'next/head';
 
 export default function Home() {
   
-  const [limit, setLimit] = useState(5); // Número inicial de posts a serem carregados
+  const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
   const { data: dados, error } = useSWR(['posts', limit], async () => {
     const { data, error } = await supabase
       .from('posts')
@@ -60,7 +60,7 @@ export default function Home() {
   const handleLoadMore = () => {
     setLimit((prevLimit) => {
       console.log('Prev Limit:', prevLimit);
-      return prevLimit + 5;
+      return prevLimit + 4;
     });
   };
 
