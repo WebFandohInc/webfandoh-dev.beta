@@ -493,11 +493,10 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 
 
  <Form.Group controlId={`formFileLg-${item.id}`} className="mt-3">
-  <Form.Label>Selecione uma imagem ou vídeo</Form.Label>
+  <Form.Label>Selecione uma imagem</Form.Label>
   <Form.Control
     type="file"
     size="sm"
-    accept="image/*, video/*"
     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAlterarImagemItem(item.id, e.target.files ? e.target.files[0] : null)}
   />
 </Form.Group>
@@ -529,10 +528,11 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
         borderRadius: '12px',
         whiteSpace: 'pre-line', // Permite quebras de linha
       }}
-      contentEditable
+      as="textarea"
+      rows={3}
       placeholder="Escreva o conteúdo do item..."
-      dangerouslySetInnerHTML={{ __html: item.conteudo }}
-      onBlur={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.innerHTML)}
+      value={item.conteudo} // Certifique-se de que você está usando o value corretamente
+      onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
     />
   </div>
 ))}
