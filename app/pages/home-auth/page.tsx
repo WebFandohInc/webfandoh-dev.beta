@@ -51,7 +51,7 @@ export default function HomeAuth () {
   var userPerfilURLTest;
 
   
-  const [limit, setLimit] = useState(4); // Número inicial de posts a serem carregados
+  const [limit, setLimit] = useState(5); // Número inicial de posts a serem carregados
   const { data: dados, error } = useSWR(['posts', limit], async () => {
     const { data, error } = await supabase
       .from('posts')
@@ -297,7 +297,7 @@ export default function HomeAuth () {
   const handleLoadMore = () => {
     setLimit((prevLimit) => {
       console.log('Prev Limit:', prevLimit);
-      return prevLimit + 4;
+      return prevLimit + 5;
     });
   };
 
@@ -493,10 +493,11 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 
 
  <Form.Group controlId={`formFileLg-${item.id}`} className="mt-3">
-  <Form.Label>Selecione uma imagem</Form.Label>
+  <Form.Label>Selecione uma imagem ou vídeo</Form.Label>
   <Form.Control
     type="file"
     size="sm"
+    accept="image/*, video/*"
     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAlterarImagemItem(item.id, e.target.files ? e.target.files[0] : null)}
   />
 </Form.Group>
@@ -528,11 +529,10 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
         borderRadius: '12px',
         whiteSpace: 'pre-line', // Permite quebras de linha
       }}
-      as="textarea"
-      rows={3}
+      contentEditable
       placeholder="Escreva o conteúdo do item..."
-      value={item.conteudo} // Certifique-se de que você está usando o value corretamente
-      onChange={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.value)}
+      dangerouslySetInnerHTML={{ __html: item.conteudo }}
+      onBlur={(e) => handleCampoItemChange(item.id, 'conteudo', e.target.innerHTML)}
     />
   </div>
 ))}
