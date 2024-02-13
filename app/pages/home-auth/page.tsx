@@ -297,7 +297,7 @@ export default function HomeAuth () {
   const handleLoadMore = () => {
     setLimit((prevLimit) => {
       console.log('Prev Limit:', prevLimit);
-      return prevLimit + 5;
+      return prevLimit + 4;
     });
   };
 
@@ -381,7 +381,7 @@ export default function HomeAuth () {
   alt="Imagem Centralizada" 
   width={680} 
   height={150}
-  style={{ maxWidth: '100%', height: 'auto' }}
+  style={{ maxWidth: '100%', height: 'auto', display: 'none' }}
 />        
 <h1 className="cover-title" style={{ color: '#373737', marginTop: '30px', marginRight: '300px', fontWeight: 'bold' }}>Capa</h1>       
         <Form.Group controlId="formFileLg" className="mb-3">
