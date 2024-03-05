@@ -5,8 +5,9 @@ import { Button, Col, Container, Nav, Navbar, Row, Form, Toast } from "react-boo
 
 import styles from './page.module.css';
 import CardIntro from "@/app/components/card/CardIntro";
+import UserProfile from '@/app/components/user-profile/UserProfile';
 import { useCallback, useEffect, useState } from "react";
-import { FaPencilAlt, FaSignOutAlt } from 'react-icons/fa';
+import { FaPencilAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { BsImage, BsPlus, BsShare, BsTrash } from 'react-icons/bs';
 import { BsArrowDown } from 'react-icons/bs';
 import { FaChevronDown } from 'react-icons/fa';
@@ -23,7 +24,7 @@ import Head from 'next/head';
 import yourFeed from '../../../public/feedpng.png';
 import logoImage from '../../../public/logobranca.png';
 import criarListaImage from '../../../public/listapepople.png';
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 export default function HomeAuth () {
 
@@ -46,6 +47,7 @@ export default function HomeAuth () {
   const [userEmail, setUserEmail] = useState<string | undefined>(undefined);
   const [userPerfilURL, setUserPerfilURL] = useState();
   const [userName, setUserName] = useState();
+  const [userBio, setUserBio] = useState();
 
   var userNameTest;
   var userPerfilURLTest;
@@ -99,6 +101,9 @@ export default function HomeAuth () {
 
       setUserPerfilURL(data?.[0]?.fotoPerfilURL);
       userPerfilURLTest = data?.[0]?.fotoPerfilURL;
+
+      setUserBio(data?.[0]?.description);
+      mutate
 
     } catch (error: any) {
       console.error('Erro ao buscar usuário:', error.message);
@@ -330,6 +335,10 @@ export default function HomeAuth () {
                 <FaPencilAlt className="me-1" /> <span style={{ fontWeight: 'bold' }}>Criar</span>
               </Nav.Link>
 
+              <Nav.Link className={`me-2 ${perfilClicado ? "active" : ""}`} onClick={() => handleClickMenu('perfil')}>
+                <FaUser  className="me-1" /> <span style={{ fontWeight: 'bold' }}>Perfil</span>
+              </Nav.Link>
+
               <Nav.Link className={`me-2 ${sairClicao ? "active" : ""}`} onClick={() => handleClickMenu('sair')}>
                 <FaSignOutAlt className="me-1" /> <span style={{ fontWeight: 'bold' }}>Sair</span>
               </Nav.Link>
@@ -367,11 +376,14 @@ export default function HomeAuth () {
         />
       ))
     )}
-  <div className="d-flex justify-content-center align-items-center mt-4">
-  <div className="d-flex justify-content-center align-items-center">
-            <Button onClick={handleLoadMore} disabled={loading}>Carregar mais</Button>
-          </div>
+    
+  {inicioClicado && (
+      <div className="d-flex justify-content-center align-items-center mt-4">
+      <div className="d-flex justify-content-center align-items-center">
+          <Button onClick={handleLoadMore} disabled={loading}>Carregar mais</Button>
       </div>
+    </div>
+  )}
       
     {escreverClicado && (
       
@@ -620,6 +632,16 @@ onKeyPress={(e) => e.key === 'Enter' && handleAddTag(e)}
 
       </div>
 
+    )}
+
+    {perfilClicado && (
+      <UserProfile
+        perfilClicado={perfilClicado}
+        userName={userName}
+        userEmail={userEmail}
+        userBio={userBio}
+        userPerfilURL={userPerfilURL}
+      />
     )}
 
     </Container>
