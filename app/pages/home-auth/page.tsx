@@ -352,9 +352,8 @@ export default function HomeAuth () {
 <Image
   src={yourFeed.src}
   alt="Imagem Centralizada"
-  width={300}
-  height={120}
-  style={{ display: 'none' }}
+  width={370}
+  height={69}
 />        </div>
      )}
 
