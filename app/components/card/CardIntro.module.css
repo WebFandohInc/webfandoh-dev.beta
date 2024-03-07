@@ -22,6 +22,8 @@
       max-width: 100%; /* Ocupa toda a largura em telas menores */
       margin: 10px; /* Margem menor nas laterais */
       margin-top: 30px;
+            box-shadow: 0px 2.859px 0px 0px #E3E3E3;
+
     }
   }
 
