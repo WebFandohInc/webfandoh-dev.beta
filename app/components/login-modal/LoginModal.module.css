@@ -3,6 +3,7 @@
     text-align: center;
     width: 350px;
     display: block;
+    border-radius: 10px;
     margin: 30px;
     margin-left: 3px;
     margin-bottom: 0px;
@@ -10,16 +11,18 @@
 
 .modalHeader  {
   color: white; /* ou qualquer outra cor desejada */
-  background-color: rgb(18, 113, 255);
+  background-color: rgb(255, 255, 255);
 }
 
 .label {
-    color: rgb(18, 113, 255); 
+    color: rgb(82, 82, 82); 
+    font-family: raleway;
 }
 
 .introSignUp {
     margin-top: 1rem;
-    color: rgb(18, 113, 255);
+    color: rgb(89, 89, 89);
+    font-family: raleway;
     cursor: pointer;
 }
 
@@ -27,11 +30,12 @@
     margin-bottom: 20px;
 }
 
+
 .textTerms {
-    color: rgb(49, 49, 49);
+    color: rgb(76, 76, 76);
     font-size: 15px;
     max-width: 400px;
-    
+    font-family: raleway;
     margin-top: 15px;
-    font-weight: 500;
+    font-weight:lighter;
 }
