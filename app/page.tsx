@@ -98,9 +98,8 @@ export default function Home() {
       <Image
   src={yourFeed.src}
   alt="Imagem Centralizada"
-  width={300}
-  height={120}
-  style={{ display: 'none' }}
+  width={370}
+  height={69}
 />      </div>
 
       {loading ? (
@@ -121,7 +120,7 @@ export default function Home() {
           ))}
         <div className="d-flex justify-content-center align-items-center mt-4">
         <div className="d-flex justify-content-center align-items-center">
-            <Button onClick={handleLoadMore} disabled={loading}>Carregar mais</Button>
+            <Button onClick={handleLoadMore} disabled={loading}>Mostrar mais</Button>
           </div>
       </div>
         </>
