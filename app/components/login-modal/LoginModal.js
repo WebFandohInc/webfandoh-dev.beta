@@ -151,7 +151,7 @@ const LoginModal = ({ show, onHide }) => {
   return (
     <Modal show={show} onHide={handleHide} centered>
       <Modal.Header closeButton className={styles.modalHeader}>
-        <Modal.Title style={{color: 'black', fontFamily: 'raleway'}}>{isCadastro ? 'Cadastro' : 'Faça login'}</Modal.Title>
+        <Modal.Title style={{color: 'black', fontFamily: 'raleway, sans-serif'}}>{isCadastro ? 'Cadastro' : 'Faça login'}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="d-flex flex-column align-items-center">
         <div className={`${styles.logoContainer} mx-auto`}>
